@@ -1,5 +1,8 @@
 *.pdf
 *.zip
 *.rar
-.idea
-.gradle
+.idea/
+.gradle/
+out/
+build/
+*.iml
