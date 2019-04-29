@@ -4,12 +4,22 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Board implements Drawable {
 
-    private Position selectorPosition;
+
+
+    private Selector selector;
     private GridElement[][] gridElements;
 
+
+
+    private int maxX;
+    private int maxY;
+
+
     public Board() {
-        this.selectorPosition = new Position(0,0);
         this.gridElements = new GridElement[13][6];
+        this.maxX = 6;
+        this.maxY = 13;
+        this.selector = new Selector(new Position(0,0));
 
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 6; j++) {
@@ -18,8 +28,17 @@ public class Board implements Drawable {
         }
     }
 
-    public Position getSelector() {
-        return selectorPosition;
+
+    public int getMaxX() {
+        return maxX;
+    }
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public Selector getSelector() {
+        return selector;
     }
 
     @Override
@@ -30,36 +49,36 @@ public class Board implements Drawable {
             }
         }
 
-        GridElement g1 = gridElements[selectorPosition.getY()][selectorPosition.getX()];
-        GridElement g2 = gridElements[selectorPosition.getY()][selectorPosition.getX()+1];
+        GridElement g1 = gridElements[selector.getPos().getY()][selector.getPos().getX()];
+        GridElement g2 = gridElements[selector.getPos().getY()][selector.getPos().getX()+1];
 
         if (g1 != null) {
             graphics.setBackgroundColor(TextColor.Factory.fromString(g1.getColor().getColor()));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(selectorPosition.getX(),selectorPosition.getY(),"S");
+            graphics.putString(selector.getPos().getX(),selector.getPos().getY(),"S");
         }
         if (g2 != null) {
             graphics.setBackgroundColor(TextColor.Factory.fromString(g2.getColor().getColor()));
             graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(selectorPosition.getX()+1,selectorPosition.getY(),"S");
+            graphics.putString(selector.getPos().getX()+1,selector.getPos().getY(),"S");
         }
 
     }
-
+/*
     public void moveSelector(int move) {
         Position nextPosition = new Position(0,0);
         switch (move) {
             case 0:
-                nextPosition = new Position(selectorPosition.getX(),selectorPosition.getY()+1);
+                nextPosition = new Position(selector.getPos().getX(),selector.getPos().getY()+1);
                 break;
             case 1:
-                nextPosition = new Position(selectorPosition.getX()-1,selectorPosition.getY());
+                nextPosition = new Position(selector.getPos().getX()-1,selector.getPos().getY());
                 break;
             case 2:
-                nextPosition = new Position(selectorPosition.getX(),selectorPosition.getY()-1);
+                nextPosition = new Position(selector.getPos().getX(),selector.getPos().getY()-1);
                 break;
             case 3:
-                nextPosition = new Position(selectorPosition.getX()+1,selectorPosition.getY());
+                nextPosition = new Position(selector.getPos().getX()+1,selector.getPos().getY());
                 break;
             default:break;
         }
@@ -72,8 +91,9 @@ public class Board implements Drawable {
             return;
         }
 
-        selectorPosition = nextPosition;
+        selector.setPos(nextPosition);
     }
+    */
 
     public GridElement getGridElement(Position p){
         return gridElements[p.getY()][p.getX()];

@@ -30,16 +30,16 @@ public class BoardController {
 
             switch (kS.getKeyType()) {
                 case ArrowDown:
-                    board.moveSelector(0);
+                    new MoveDownCommand(board).exec();
                     break;
                 case ArrowLeft:
-                    board.moveSelector(1);
+                    new MoveLeftCommand(board).exec();
                     break;
                 case ArrowUp:
-                    board.moveSelector(2);
+                    new MoveUpCommand(board).exec();
                     break;
                 case ArrowRight:
-                    board.moveSelector(3);
+                    new MoveRightCommand(board).exec();
                     break;
                 case Character:
                     if (kS.getCharacter() == ' ') {
