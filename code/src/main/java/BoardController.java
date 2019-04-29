@@ -43,8 +43,14 @@ public class BoardController {
                     break;
                 case Character:
                     if (kS.getCharacter() == ' ') {
-                        board.swap();
+                        new SwapCommand(board).exec();
+                    } else if (kS.getCharacter() == 'q') {
+                        shouldClose = true;
                     }
+                    break;
+                case EOF:
+                    shouldClose = true;
+                    break;
                 default:break;
             }
         } catch (IOException e) {

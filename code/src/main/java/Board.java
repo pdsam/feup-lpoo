@@ -6,11 +6,6 @@ public class Board implements Drawable {
 
     private Position selectorPosition;
     private GridElement[][] gridElements;
-    private Position selector;
-
-    public Position getSelector() {
-        return selector;
-    }
 
     public Board() {
         this.selectorPosition = new Position(0,0);
@@ -21,6 +16,10 @@ public class Board implements Drawable {
                 gridElements[i][j] = new Block();
             }
         }
+    }
+
+    public Position getSelector() {
+        return selectorPosition;
     }
 
     @Override
