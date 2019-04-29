@@ -1,8 +1,8 @@
-public class Swap implements Command {
+public class SwapCommand implements Command {
 
     private Board board;
 
-    public Swap(Board board) {
+    public SwapCommand(Board board) {
         this.board = board;
 
     }
