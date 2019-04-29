@@ -6,6 +6,11 @@ public class Board implements Drawable {
 
     private Position selectorPosition;
     private GridElement[][] gridElements;
+    private Position selector;
+
+    public Position getSelector() {
+        return selector;
+    }
 
     public Board() {
         this.selectorPosition = new Position(0,0);
@@ -71,30 +76,12 @@ public class Board implements Drawable {
         selectorPosition = nextPosition;
     }
 
-    public void swap() {
-        swap(new Position(selectorPosition.getX(), selectorPosition.getY()),
-                new Position(selectorPosition.getX()+1, selectorPosition.getY()));
+    public GridElement getGridElement(Position p){
+        return gridElements[p.getY()][p.getX()];
     }
 
-    private void swap(Position p1, Position p2) {
-        GridElement g1 = gridElements[p1.getY()][p1.getX()];
-        GridElement g2 = gridElements[p2.getY()][p2.getX()];
-
-        if (g1 != null || g2 != null) {
-            if (g1 == null) {
-                gridElements[p2.getY()][p2.getX()] = null;
-                gridElements[p1.getY()][p1.getX()] = g2;
-            } else if (g2 == null) {
-                gridElements[p1.getY()][p1.getX()] = null;
-                gridElements[p2.getY()][p2.getX()] = g1;
-            } else {
-                gridElements[p2.getY()][p2.getX()] = null;
-                gridElements[p1.getY()][p1.getX()] = null;
-                gridElements[p2.getY()][p2.getX()] = g1;
-                gridElements[p1.getY()][p1.getX()] = g2;
-            }
-        }
+    public void setGridElements(Position p, GridElement element){
+        gridElements[p.getY()][p.getX()] = element;
     }
-
 
 }
