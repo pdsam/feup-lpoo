@@ -9,6 +9,10 @@ public class Block implements GridElement {
         color = Color.randomColor();
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

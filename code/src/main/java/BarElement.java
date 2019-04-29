@@ -13,6 +13,11 @@ public class BarElement implements Drawable, GridElement{
     }
 
     @Override
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
     public void draw(TextGraphics graphics, int x, int y) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(color.getColor()));
         graphics.enableModifiers(SGR.BOLD);

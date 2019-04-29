@@ -13,11 +13,9 @@ public class Application {
         screen.doResizeIfNecessary();
 
         Board b = new Board();
+        BoardController bC = new BoardController(screen, b);
 
-        b.draw(screen.newTextGraphics(),0,0);
-        screen.refresh();
-
+        bC.run();
     }
-
 
 }
