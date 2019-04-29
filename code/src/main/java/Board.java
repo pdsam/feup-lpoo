@@ -6,6 +6,11 @@ import java.util.Map;
 public class Board implements Drawable {
 
     private GridElement[][] gridElements;
+    private Position selector;
+
+    public Position getSelector() {
+        return selector;
+    }
 
     public Board() {
         this.gridElements = new GridElement[13][6];
@@ -26,6 +31,19 @@ public class Board implements Drawable {
         }
     }
 
+
+    public GridElement getGridElement(Position p){
+        return gridElements[p.getY()][p.getX()];
+
+
+    }
+
+    public void setGridElements(Position p, GridElement element){
+        gridElements[p.getY()][p.getX()] = element;
+    }
+
+
+    /*
     public void swap(Position p1, Position p2) {
         GridElement g1 = gridElements[p1.getY()][p1.getX()];
         GridElement g2 = gridElements[p2.getY()][p2.getX()];
@@ -45,6 +63,6 @@ public class Board implements Drawable {
             }
         }
     }
-
+*/
 
 }
