@@ -9,7 +9,7 @@ public class SwapCommand implements Command {
 
     @Override
     public void exec(){
-        Position p1 = board.getSelector();
+        Position p1 = board.getSelector().getPos();
         Position p2 = new Position(p1.getX()+1, p1.getY());
 
         GridElement g1 = board.getGridElement(p1);

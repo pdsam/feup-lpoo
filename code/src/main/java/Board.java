@@ -41,35 +41,6 @@ public class Board {
         return selector;
     }
 
-    public void moveSelector(int move) {
-        Position nextPosition = new Position(0,0);
-        switch (move) {
-            case 0:
-                nextPosition = new Position(selector.getPos().getX(),selector.getPos().getY()+1);
-                break;
-            case 1:
-                nextPosition = new Position(selector.getPos().getX()-1,selector.getPos().getY());
-                break;
-            case 2:
-                nextPosition = new Position(selector.getPos().getX(),selector.getPos().getY()-1);
-                break;
-            case 3:
-                nextPosition = new Position(selector.getPos().getX()+1,selector.getPos().getY());
-                break;
-            default:break;
-        }
-
-        if (nextPosition.getY() >= 13 || nextPosition.getY() < 0) {
-            return;
-        }
-
-        if (nextPosition.getX() >= 5 || nextPosition.getX() < 0) {
-            return;
-        }
-
-        selector.setPos(nextPosition);
-    }
-
     public GridElement getGridElement(Position p){
         return gridElements[p.getY()][p.getX()];
     }

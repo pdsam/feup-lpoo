@@ -32,7 +32,7 @@ public class LanternaBoardView implements View{
             }
         }
 
-        Position selectorPosition = board.getSelector();
+        Position selectorPosition = board.getSelector().getPos();
         GridElement g1 = board.getGridElement(new Position(selectorPosition.getX(), selectorPosition.getY()));
         GridElement g2 = board.getGridElement(new Position(selectorPosition.getX() + 1, selectorPosition.getY()));
 
