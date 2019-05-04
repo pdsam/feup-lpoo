@@ -22,7 +22,7 @@ Not much of the way of stand alone features have been implmented yet, in other w
 
 	1. Abstract Class enabling to switch the view to be implemented both in lanterna and swing.
 	2. Implement the time based element in the game.
-	3. Implment the row checker.
+	3. Implement the row checker.
 	4.
 
 ## Design
