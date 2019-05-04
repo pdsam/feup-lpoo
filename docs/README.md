@@ -11,12 +11,19 @@
 <!--
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 -->
+Not much of the way of stand alone features have been implmented yet, in other words, the code we have written consists only in the base structure of the MVC architectural pattern, having the model fully implmented, the controller partially, and the view part is not segregated from the others.
+
 ## Planned Features
 <!--
 > This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
 
 -->
 ![alt text](http://aluminumangel.org/attack/screen_shot_0.jpg "Original GUI")
+
+	1. Abstract Class enabling to switch the view to be implemented both in lanterna and swing.
+	2. Implement the time based element in the game.
+	3. Implment the row checker.
+	4.
 
 ## Design
 <!--
