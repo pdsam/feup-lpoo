@@ -14,7 +14,10 @@
 ## Planned Features
 <!--
 > This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
+
 -->
+![alt text](http://aluminumangel.org/attack/screen_shot_0.jpg "Original GUI")
+
 ## Design
 <!--
 > This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts: "Problem in Context", "The Pattern", "Implementation" and "Consequences".
