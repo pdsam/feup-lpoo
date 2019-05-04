@@ -1,4 +1,4 @@
-public interface GridElement extends Drawable {
+public interface GridElement {
     void deleted();
     Color getColor();
 }

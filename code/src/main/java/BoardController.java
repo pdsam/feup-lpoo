@@ -5,20 +5,22 @@ import java.io.IOException;
 
 public class BoardController {
     private Screen context;
+    private View boardView;
     private Board board;
     boolean shouldClose = false;
 
     public BoardController(Screen context, Board board) {
+        this.boardView = new LanternaBoardView(context.newTextGraphics(), board);
         this.context = context;
         this.board = board;
     }
 
     public void run() throws Exception{
-        board.draw(context.newTextGraphics(), 0, 0);
+        boardView.render();
         context.refresh();
         while (!shouldClose) {
             processInput();
-            board.draw(context.newTextGraphics(), 0, 0);
+            boardView.render();
             context.refresh();
         }
     }
@@ -46,10 +48,12 @@ public class BoardController {
                         new SwapCommand(board).exec();
                     } else if (kS.getCharacter() == 'q') {
                         shouldClose = true;
+                        context.close();
                     }
                     break;
                 case EOF:
                     shouldClose = true;
+                    context.close();
                     break;
                 default:break;
             }

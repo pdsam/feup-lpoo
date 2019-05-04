@@ -1,15 +1,15 @@
 import java.util.Random;
 
 public enum Color {
-    YELLOW('Y', "#FFFF00"), GREEN('G', "#00FF00"),
-    BLUE('B', "#0000FF"), PURPLE('P', "#FF00FF"),
-    ORANGE('O', "#FF5900"), GRAY('G', "#9E9E9E"),
-    BAR('#', "#FFFFFF");
+    YELLOW(" ", "#FFFF00"), GREEN(" ", "#00FF00"),
+    BLUE(" ", "#0000FF"), PURPLE(" ", "#FF00FF"),
+    ORANGE( " ", "#FF5900"), GRAY(" ", "#9E9E9E"),
+    BAR("#", "#FFFFFF");
 
-    private final char character;
+    private final String character;
     private final String color;
 
-    Color(char c, String color) {
+    Color(String c, String color) {
         this.character = c;
         this.color = color;
     }
@@ -18,7 +18,7 @@ public enum Color {
         return values()[new Random().nextInt(6)];
     }
 
-    public char getCharacter() {
+    public String getCharacter() {
         return character;
     }
 
