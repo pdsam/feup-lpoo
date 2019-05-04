@@ -21,14 +21,21 @@ Not much of the way of stand alone features have been implmented yet, in other w
 ![alt text](http://aluminumangel.org/attack/screen_shot_0.jpg "Original GUI")
 
 	1. Abstract Class enabling to switch the view to be implemented both in lanterna and swing.
-	2. Implement the time based element in the game.
-	3. Implement the row checker.
+	2. Implement the time based element in the game (pushing new lines into the board on a time base). 
+	3. Implment the row checker.
 	4.
 
 ## Design
 <!--
 > This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts: "Problem in Context", "The Pattern", "Implementation" and "Consequences".
 -->
+Given the fact that we are doing a game, we opted to use the Model-View-Controller Architectural Pattern. 
+(...)
+
+The controller will need to interact with the model diferently depending on the input from the user. Therefore having a large amount of possible commands, we Opted to use the Command Design Pattern. This allows us to: structure a system around high-level operations built on primitive operations.
+
+Later we see we wil need to use the observer design pattern, with the intent to only check certain areas of the board for patterns, when they were updated.
+
 ## Known Code Smells and Refactoring Suggestions
 <!--
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.
