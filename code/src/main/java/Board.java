@@ -4,12 +4,22 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Board {
 
-    private Position selectorPosition;
+
+
+    private Selector selector;
     private GridElement[][] gridElements;
 
+
+
+    private int maxX;
+    private int maxY;
+
+
     public Board() {
-        this.selectorPosition = new Position(0,0);
         this.gridElements = new GridElement[13][6];
+        this.maxX = 6;
+        this.maxY = 13;
+        this.selector = new Selector(new Position(0,0));
 
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 6; j++) {
@@ -18,24 +28,33 @@ public class Board {
         }
     }
 
-    public Position getSelector() {
-        return selectorPosition;
+
+    public int getMaxX() {
+        return maxX;
+    }
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public Selector getSelector() {
+        return selector;
     }
 
     public void moveSelector(int move) {
         Position nextPosition = new Position(0,0);
         switch (move) {
             case 0:
-                nextPosition = new Position(selectorPosition.getX(),selectorPosition.getY()+1);
+                nextPosition = new Position(selector.getPos().getX(),selector.getPos().getY()+1);
                 break;
             case 1:
-                nextPosition = new Position(selectorPosition.getX()-1,selectorPosition.getY());
+                nextPosition = new Position(selector.getPos().getX()-1,selector.getPos().getY());
                 break;
             case 2:
-                nextPosition = new Position(selectorPosition.getX(),selectorPosition.getY()-1);
+                nextPosition = new Position(selector.getPos().getX(),selector.getPos().getY()-1);
                 break;
             case 3:
-                nextPosition = new Position(selectorPosition.getX()+1,selectorPosition.getY());
+                nextPosition = new Position(selector.getPos().getX()+1,selector.getPos().getY());
                 break;
             default:break;
         }
@@ -48,7 +67,7 @@ public class Board {
             return;
         }
 
-        selectorPosition = nextPosition;
+        selector.setPos(nextPosition);
     }
 
     public GridElement getGridElement(Position p){
