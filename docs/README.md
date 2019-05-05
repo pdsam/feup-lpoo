@@ -1,4 +1,4 @@
-
+﻿
 # LPOO_71 Crack Attack
 
 > The project goal is to recreate the game [Crack attack](http://www.aluminumangel.org/attack/). The game's goal is to not let the blocks get to the top(like tetris) by making lines with at least 3 colored blocks with the same colour to pop them thus increasing the score.
@@ -22,9 +22,9 @@ Not much of the way of stand alone features have been implmented yet, in other w
 -->
 !["Original GUI"](http://aluminumangel.org/attack/screen_shot_0.jpg)
 
-    1. Abstract Class enabling to switch the view to be implemented both in lanterna and swing.
-    2. Implement the time based element in the game (pushing new lines into the board on a time base).
-    3. Implment the row checker.
+1. Abstract Class enabling to switch the view to be implemented both in lanterna and swing.
+2. Implement the time based element in the game (pushing new lines into the board on a time base).
+3. Implment the row checker.
 
 ## Design
 
@@ -45,7 +45,7 @@ Later we see we wil need to use the observer design pattern, with the intent to 
 -->
 A few code smells we can already point out are:
 
-    1. The BoardController Class should not be reading input, this should be a responsibility for the view. As we are intending to give the option of using either Swing or Lanterna. Both frameworks have different ways of handling input, so input handling is better suited to be handled by the view that will then send the appropriate messages to the controller. If we choose to keep the input handling in then the controller, then the best option can be to create an abstract input handler class that can then be specialized into each of the frameworks, but this can cause the problem of the view not matching the respectie input handler that is being used.
+1. The BoardController Class should not be reading input, this should be a responsibility for the view. As we are intending to give the option of using either Swing or Lanterna. Both frameworks have different ways of handling input, so input handling is better suited to be handled by the view that will then send the appropriate messages to the controller. If we choose to keep the input handling in then the controller, then the best option can be to create an abstract input handler class that can then be specialized into each of the frameworks, but this can cause the problem of the view not matching the respectie input handler that is being used.
 
 ## Testing Results
 
