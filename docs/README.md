@@ -1,7 +1,7 @@
 
 # LPOO_71 Crack Attack
 
-> The project goal is to recreate the game ![alt text](http://www.aluminumangel.org/attack/ "Crack attack"). The game's goal is to not let the blocks get to the top(like tetris) by making lines with at least 3 colored blocks with the same colour to pop them thus increasing the score.
+> The project goal is to recreate the game !["Crack attack"](http://www.aluminumangel.org/attack/). The game's goal is to not let the blocks get to the top(like tetris) by making lines with at least 3 colored blocks with the same colour to pop them thus increasing the score.
 
 <!--
 > Include here one or two paragraphs explaining the main idea of the project, followed by a sentence identifying who the authors are. 
