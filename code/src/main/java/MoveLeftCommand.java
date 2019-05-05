@@ -6,7 +6,6 @@ public class MoveLeftCommand implements Command {
 
     }
 
-
     @Override
     public void exec() {
         Position pos = board.getSelector().getPos();

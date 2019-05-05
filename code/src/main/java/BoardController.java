@@ -58,7 +58,7 @@ public class BoardController {
                 default:break;
             }
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 }
