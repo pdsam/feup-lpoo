@@ -20,7 +20,7 @@ Not much of the way of stand alone features have been implmented yet, in other w
 > This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
 
 -->
-![alt text](http://aluminumangel.org/attack/screen_shot_0.jpg "Original GUI")
+!["Original GUI"](http://aluminumangel.org/attack/screen_shot_0.jpg)
 
     1. Abstract Class enabling to switch the view to be implemented both in lanterna and swing.
     2. Implement the time based element in the game (pushing new lines into the board on a time base).
