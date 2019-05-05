@@ -22,7 +22,7 @@ Not much of the way of stand alone features have been implmented yet, in other w
 -->
 !["Original GUI"](http://aluminumangel.org/attack/screen_shot_0.jpg)
 
-1. Abstract Class enabling to switch the view to be implemented both in lanterna and swing.
+1. Abstract Factory enabling to switch the view to be implemented both in lanterna and swing.
 2. Implement the time based element in the game (pushing new lines into the board on a time base).
 3. Implment the row checker.
 
