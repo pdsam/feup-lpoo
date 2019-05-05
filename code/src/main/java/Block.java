@@ -19,7 +19,6 @@ public class Block implements GridElement {
 
     @Override
     public void deleted() {
-        return;
     }
 
 }

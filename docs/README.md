@@ -42,13 +42,14 @@ Later we see we wil need to use the observer design pattern, with the intent to 
 -->
 A few code smells we can already point out are:
 
-	1. The class Board is too large, because at this point it handles the drawing on the screen which it should not do. So, we will need to extract a class from Board to split the Model from the view.
+	1. The BoardController Class should not be reading input, this should be a responsibility for the view. As we are intending to give the option of using either Swing or Lanterna. Both frameworks have different ways of handling input, so input handling is better suited to be handled by the view that will then send the appropriate messages to the controller. If we choose to keep the input handling in then the controller, then the best option can be to create an abstract input handler class that can then be specialized into each of the frameworks, but this can cause the problem of the view not matching the respectie input handler that is being used.
 	2. 
 	3. 
 ## Testing Results
 <!--
 > This section should contain screenshots of the main results of both the test coverage and mutation testing reports. It should also contain links to those reports in HTML format (you can copy the reports to the docs folder).
 -->
+Right now no tests have been made to the code as it is still in a very volatile state and many changes are expected.
 ## Self-evaluation
 <!--
 > In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
