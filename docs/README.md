@@ -32,11 +32,12 @@ Not much of the way of stand alone features have been implmented yet, in other w
 > This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts: "Problem in Context", "The Pattern", "Implementation" and "Consequences".
 -->
 Given the fact that we are doing a game, we opted to use the Model-View-Controller Architectural Pattern.
-(...)
 
 The controller will need to interact with the model diferently depending on the input from the user. Therefore having a large amount of possible commands, we Opted to use the Command Design Pattern. This allows us to: structure a system around high-level operations built on primitive operations.
 
-Later we see we wil need to use the observer design pattern, with the intent to only check certain areas of the board for patterns, when they were updated.
+Later we will implement a feature were unbreakable bars appear from the top and can only disappear when you complete a line adjacent to it, placing new blocks in the space it occupied. The observer design pattern will come in handy for this as we can treat the bar as a set of unmovable blocks that observe each other and check if a row has been completed next to any of them.
+
+There is also a possibility of wanting to use different kinds of graphical frameworks, so for this mater it is appealing to use the abstract factory design pattern to create the correct instances of, for example, the View class depending on which framework is being used.
 
 ## Known Code Smells and Refactoring Suggestions
 
