@@ -60,3 +60,6 @@ Right now no tests have been made to the code as it is still in a very volatile 
 <!--
 > In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
 >-->
+
+So far, we both worked equally on the project.
+Moisés would implement the code and Paulo would refactor it into SOLID standards.
