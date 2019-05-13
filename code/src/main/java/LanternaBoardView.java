@@ -1,14 +1,21 @@
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 
-public class LanternaBoardView implements View{
-    private TextGraphics graphics;
-    private Board board;
+import java.io.IOException;
 
-    public LanternaBoardView(TextGraphics graphics, Board board) {
-        this.graphics = graphics;
+public class LanternaBoardView implements View{
+    private Screen context;
+    private TextGraphics graphics;
+
+    private Board board;
+    private boolean shouldClose = false;
+
+    public LanternaBoardView(Screen screen, Board board) {
+        this.context = screen;
+        this.graphics = context.newTextGraphics();
         this.board = board;
     }
 
@@ -48,5 +55,53 @@ public class LanternaBoardView implements View{
             graphics.enableModifiers(SGR.BOLD);
             graphics.putString(selectorPosition.getX()+1,selectorPosition.getY(),"S");
         }
+
+        try {
+            context.refresh();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void processInput() {
+        KeyStroke kS;
+        try {
+            kS = context.readInput();
+
+            switch (kS.getKeyType()) {
+                case ArrowDown:
+                    new MoveDownCommand(board).exec();
+                    break;
+                case ArrowLeft:
+                    new MoveLeftCommand(board).exec();
+                    break;
+                case ArrowUp:
+                    new MoveUpCommand(board).exec();
+                    break;
+                case ArrowRight:
+                    new MoveRightCommand(board).exec();
+                    break;
+                case Character:
+                    if (kS.getCharacter() == ' ') {
+                        new SwapCommand(board).exec();
+                    } else if (kS.getCharacter() == 'q') {
+                        shouldClose = true;
+                        context.close();
+                    }
+                    break;
+                case EOF:
+                    shouldClose = true;
+                    context.close();
+                    break;
+                default:break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean shouldClose() {
+        return shouldClose;
     }
 }

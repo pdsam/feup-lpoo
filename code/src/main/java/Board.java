@@ -1,19 +1,9 @@
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-
 public class Board {
-
-
-
     private Selector selector;
     private GridElement[][] gridElements;
 
-
-
     private int maxX;
     private int maxY;
-
 
     public Board() {
         this.gridElements = new GridElement[13][6];
@@ -27,7 +17,6 @@ public class Board {
             }
         }
     }
-
 
     public int getMaxX() {
         return maxX;

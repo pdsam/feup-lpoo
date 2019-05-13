@@ -13,7 +13,8 @@ public class Application {
         screen.doResizeIfNecessary();
 
         Board b = new Board();
-        BoardController bC = new BoardController(screen, b);
+        View v = new LanternaBoardView(screen, b);
+        BoardController bC = new BoardController(v, b);
 
         bC.run();
     }
