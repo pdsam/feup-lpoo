@@ -11,7 +11,7 @@ public class Board {
         this.maxY = 13;
         this.selector = new Selector(new Position(0,0));
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 6; i < 13; i++) {
             for (int j = 0; j < 6; j++) {
                 gridElements[i][j] = new Block();
             }

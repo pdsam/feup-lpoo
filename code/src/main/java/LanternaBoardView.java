@@ -1,22 +1,29 @@
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class LanternaBoardView implements View{
+public class LanternaBoardView extends AbstractView {
     private Screen context;
     private TextGraphics graphics;
+    private LanternaInputThread inputListener;
 
     private Board board;
     private boolean shouldClose = false;
 
     public LanternaBoardView(Screen screen, Board board) {
+        this.eventQueue = new ConcurrentLinkedQueue<>();
         this.context = screen;
+        this.inputListener = new LanternaInputThread(this.context, this.eventQueue);
+
         this.graphics = context.newTextGraphics();
+
         this.board = board;
+
+        inputListener.start();
     }
 
     @Override
@@ -46,15 +53,20 @@ public class LanternaBoardView implements View{
         if (g1 != null) {
             Color color = g1.getColor();
             graphics.setBackgroundColor(TextColor.Factory.fromString(color.getColor()));
-            graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(selectorPosition.getX(),selectorPosition.getY(),"S");
+        } else {
+            graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         }
+        graphics.enableModifiers(SGR.BOLD);
+        graphics.putString(selectorPosition.getX(),selectorPosition.getY(),"S");
+
         if (g2 != null) {
             Color color = g2.getColor();
             graphics.setBackgroundColor(TextColor.Factory.fromString(color.getColor()));
-            graphics.enableModifiers(SGR.BOLD);
-            graphics.putString(selectorPosition.getX()+1,selectorPosition.getY(),"S");
+        } else {
+            graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         }
+        graphics.enableModifiers(SGR.BOLD);
+        graphics.putString(selectorPosition.getX()+1,selectorPosition.getY(),"S");
 
         try {
             context.refresh();
@@ -63,45 +75,19 @@ public class LanternaBoardView implements View{
         }
     }
 
-    public void processInput() {
-        KeyStroke kS;
-        try {
-            kS = context.readInput();
-
-            switch (kS.getKeyType()) {
-                case ArrowDown:
-                    new MoveDownCommand(board).exec();
-                    break;
-                case ArrowLeft:
-                    new MoveLeftCommand(board).exec();
-                    break;
-                case ArrowUp:
-                    new MoveUpCommand(board).exec();
-                    break;
-                case ArrowRight:
-                    new MoveRightCommand(board).exec();
-                    break;
-                case Character:
-                    if (kS.getCharacter() == ' ') {
-                        new SwapCommand(board).exec();
-                    } else if (kS.getCharacter() == 'q') {
-                        shouldClose = true;
-                        context.close();
-                    }
-                    break;
-                case EOF:
-                    shouldClose = true;
-                    context.close();
-                    break;
-                default:break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public boolean shouldClose() {
         return shouldClose;
+    }
+
+    @Override
+    public void close() {
+        inputListener.stop();
+        shouldClose = true;
+        try {
+            context.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
