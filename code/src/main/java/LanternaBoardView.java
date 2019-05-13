@@ -49,11 +49,23 @@ public class LanternaBoardView implements View{
             graphics.enableModifiers(SGR.BOLD);
             graphics.putString(selectorPosition.getX(),selectorPosition.getY(),"S");
         }
+        else{
+            graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(selectorPosition.getX(),selectorPosition.getY(),"S");
+
+        }
         if (g2 != null) {
             Color color = g2.getColor();
             graphics.setBackgroundColor(TextColor.Factory.fromString(color.getColor()));
             graphics.enableModifiers(SGR.BOLD);
             graphics.putString(selectorPosition.getX()+1,selectorPosition.getY(),"S");
+        }
+        else{
+            graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+            graphics.enableModifiers(SGR.BOLD);
+            graphics.putString(selectorPosition.getX()+1,selectorPosition.getY(),"S");
+
         }
 
         try {

@@ -3,5 +3,5 @@ public interface View {
     void processInput();
     boolean shouldClose();
 
-    //void subscribeEvent(EventType event, EventHanlder handler);
+    //void subscribeEvent(EventType event, EventHandler handler);
 }
