@@ -46,6 +46,7 @@ public class BoardController {
                 case Character:
                     if (kS.getCharacter() == ' ') {
                         new SwapCommand(board).exec();
+                        //new NewLineCommand(board).exec();
                     } else if (kS.getCharacter() == 'q') {
                         shouldClose = true;
                         context.close();
