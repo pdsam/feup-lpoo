@@ -9,7 +9,7 @@ public class MoveDownCommand implements Command {
     @Override
     public void exec() {
         Position pos = board.getSelector().getPos();
-        if(pos.getY() +1 > board.getMaxY())
+        if(pos.getY() + 1 >= board.getMaxY())
             return;
         pos.setY(pos.getY()+1);
 
