@@ -12,13 +12,10 @@ public class SwapCommand implements Command {
         Position p1 = board.getSelector().getPos();
         Position p2 = new Position(p1.getX()+1, p1.getY());
 
-        GridElement g1 = board.getGridElement(p1);
-        GridElement g2 = board.getGridElement(p2);
+        board.swap(p1,p2);
 
-        if (g1 != null || g2 != null) {
-            board.setGridElements(p1,g2);
-            board.setGridElements(p2,g1);
-        }
+        board.notifyObserver(p1);
+        board.notifyObserver(p2);
 
     }
 }

@@ -8,10 +8,11 @@ public class PhysicsBoardObserver extends BoardObserver {
 
     @Override
     public void update(Position p) {
-        if(board.getGridElement(new Position(p.getX(),p.getY()+1)) == null){
-            controler.blockGravityUpdate(p);
-        }
+        if(p.getY() < board.getMaxY()) {
+            //if (board.getGridElement(new Position(p.getX(), p.getY() + 1)) == null)
+                controler.blockGravityUpdate(p);
 
+        }
 
     }
 }

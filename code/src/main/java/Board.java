@@ -18,13 +18,16 @@ public class Board {
 
         for (int i = 7; i < 13; i++) {
             for (int j = 0; j < 6; j++) {
+                if(j == 2){
+                    continue;
+                }
                 gridElements[i][j] = new Block();
             }
         }
     }
 
     public int getMaxX() {
-        return maxX;
+        return  maxX;
     }
 
     public int getMaxY() {
@@ -39,9 +42,22 @@ public class Board {
         return gridElements[p.getY()][p.getX()];
     }
 
+
+    //isto é do controler ou daqui?
+    protected void swap(Position p1, Position p2){
+        GridElement g1 = this.getGridElement(p1);
+        GridElement g2 = this.getGridElement(p2);
+
+        if (g1 != null || g2 != null) {
+            this.setGridElements(p1,g2);
+            this.setGridElements(p2,g1);
+
+        }
+
+    }
+
     public void setGridElements(Position p, GridElement element){
         gridElements[p.getY()][p.getX()] = element;
-        notifyObserver(p);
 
     }
 

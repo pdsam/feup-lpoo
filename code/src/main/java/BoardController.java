@@ -9,6 +9,7 @@ public class BoardController {
     public BoardController(View view, Board board) {
         this.boardView = view;
         this.board = board;
+        this.board.attachObserver(new PhysicsBoardObserver(board,this));
     }
 
     public void run() {
@@ -21,15 +22,48 @@ public class BoardController {
 
 
 
-    public void blockGravityUpdate(Position p){
-        /*for(int i = 1;i < board.getMaxY() -1 - p.getY();i++){
-            if(board.getGridElement(new Position(p.getX(),p.getY() +1) ) != null)
-                board.setGridElements(new Position(p.getX(),p.getY() +i -1), board.getGridElement(p));
-            board.setGridElements(p, null);
+    private boolean inBoundaries(Position p){
+        if(p.getY() <0 || p.getY() >= board.getMaxY()  || p.getX() < 0 || p.getX()>=board.getMaxX()  )
+            return false;
+
+        return true;
+    }
+
+
+
+
+    public void blockGravityUpdate(Position p){//que função jabarda
+        if(!inBoundaries(p))
+            return;
+
+        if(board.getGridElement(p) != null) {
+            if(p.getY() == board.getMaxY() -1)
                 return;
+
+            Position bottom = new Position(p.getX(),board.getMaxY()-1);
+
+            while(board.getGridElement(bottom )!=null ){
+
+                bottom.decrementY();
+
+
+            }
+
+            board.swap(p,bottom);
+            blockGravityUpdate(new Position(p.getX(),p.getY()-1));
+
+        }
+        else{
+            if(p.getY() != 0){
+                Position aux = new Position(p.getX(),p.getY()-1);
+                if(board.getGridElement(aux)!= null)
+                    board.swap(p, aux);
+                blockGravityUpdate(aux);
+
+            }
+
         }
 
-        */
     }
 
 
