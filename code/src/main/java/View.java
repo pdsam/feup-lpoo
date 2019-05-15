@@ -1,7 +1,6 @@
 public interface View {
     void render();
-    void processInput();
+    EventType pollEvents();
     boolean shouldClose();
-
-    //void subscribeEvent(EventType event, EventHandler handler);
+    void close();
 }

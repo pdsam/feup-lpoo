@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 public class Application {
+
     public static void main(String[] args) throws Exception {
         Terminal term = new DefaultTerminalFactory().createTerminal();
         Screen screen = new TerminalScreen(term);
