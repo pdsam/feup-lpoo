@@ -107,8 +107,66 @@ public class BoardController {
     }
 
 
-    public void comboChecker(Position p){
+    public void comboChecker(Position p){//first approach
+        Block origin = (Block) board.getGridElement(p);
+        List<Position> positions = new ArrayList<>();
+        //vertical
+        int offset = 1;
+        while(true) {
+            Position temp = new Position(p.getX(), p.getY() + offset);
+            if (inBoundaries(temp)) {
+                if (origin.equals(board.getGridElement(temp))) {
+                    positions.add(temp);
+                    offset++;
+                } else
+                    break;
+            }
+            else break;
+        }
+        offset = 1;
+        while(true) {
+            Position temp = new Position(p.getX(), p.getY() - offset);
+            if (inBoundaries(temp)) {
+                if (origin.equals(board.getGridElement(temp))) {
+                    positions.add(temp);
+                    offset++;
+                } else
+                    break;
+            }
+            else break;
+        }
+        offset = 1;
+        if(positions.size() < 3){
+            positions.clear();
+        }
 
+        //horizontal
+        while(true) {
+            Position temp = new Position(p.getX() + offset, p.getY());
+            if (inBoundaries(temp)) {
+                if (origin.equals(board.getGridElement(temp))) {
+                    positions.add(temp);
+                    offset++;
+                } else
+                    break;
+            }
+            else break;
+        }
+        offset = 1;
+        while(true) {
+            Position temp = new Position(p.getX() - offset, p.getY());
+            if (inBoundaries(temp)) {
+                if (origin.equals(board.getGridElement(temp))) {
+                    positions.add(temp);
+                    offset++;
+                } else
+                    break;
+            }
+            else break;
+        }
+
+        if(positions.size() > 3)
+            System.out.println("break");
     }
 
 }

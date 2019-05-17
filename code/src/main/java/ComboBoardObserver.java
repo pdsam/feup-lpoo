@@ -7,6 +7,6 @@ public class ComboBoardObserver extends BoardObserver {
 
     @Override
     public void update(Position p) {
-
+        controler.comboChecker(p);
     }
 }

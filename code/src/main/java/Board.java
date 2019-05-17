@@ -71,4 +71,13 @@ public class Board {
         }
     }
 
+    public void breaker(List<Position> p){
+        for(Position tmp : p){
+            setGridElements(tmp, null);
+        }
+        for(Position tmp : p){
+            this.notifyObserver(tmp);
+        }
+    }
+
 }
