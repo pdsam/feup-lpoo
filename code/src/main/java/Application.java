@@ -2,6 +2,10 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import controller.BoardController;
+import model.Board;
+import view.LanternaBoardView;
+import view.View;
 
 public class Application {
 

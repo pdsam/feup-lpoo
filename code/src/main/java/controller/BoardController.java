@@ -1,4 +1,13 @@
-import javax.sound.sampled.Line;
+package controller;
+
+import controller.commands.*;
+import model.Block;
+import model.Board;
+import model.Position;
+import view.Callback;
+import view.EventType;
+
+import view.View;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -29,7 +38,7 @@ public class BoardController {
 
     public void run() {
 
-        LineTimerThread timer = new LineTimerThread("LineTimerThread", board);
+        LineTimerThread timer = new LineTimerThread("controller.LineTimerThread", board);
         timer.start();
 
         boardView.render();
@@ -88,10 +97,10 @@ public class BoardController {
     public void blockGravityUpdate(Position p){
 /*
         for(int i = board.getMaxY()-1; i >= 0; i--){
-            Position newest = new Position(p.getX(),i);
+            model.Position newest = new model.Position(p.getX(),i);
             if(board.getGridElement(newest)== null){
                 for(int j = newest.getY()-1; j >= 0 ; j--){
-                    Position toFall = new Position(p.getX(),j);
+                    model.Position toFall = new model.Position(p.getX(),j);
                     if(board.getGridElement(toFall) != null){
                         board.swap(newest,toFall);
                         break;
@@ -130,9 +139,9 @@ public class BoardController {
             if(p.getY() == board.getMaxY() -1)
                 return;
 
-            if(board.getGridElement(new Position(p.getX(),p.getY()-1))!= null)
+            if(board.getGridElement(new model.Position(p.getX(),p.getY()-1))!= null)
                 return;
-            Position bottom = new Position(p.getX(),board.getMaxY()-1);
+            model.Position bottom = new model.Position(p.getX(),board.getMaxY()-1);
 
             while(board.getGridElement(bottom )!=null&& bottom.getY()> p.getY() ){
 
@@ -142,12 +151,12 @@ public class BoardController {
             }
 
             board.swap(p,bottom);
-            blockGravityUpdate(new Position(p.getX(),p.getY()-1));
+            blockGravityUpdate(new model.Position(p.getX(),p.getY()-1));
 
         }
         else{
             if(p.getY() != 0){
-                Position aux = new Position(p.getX(),p.getY()-1);
+                model.Position aux = new model.Position(p.getX(),p.getY()-1);
                 if(board.getGridElement(aux)!= null)
                     board.swap(p, aux);
                 blockGravityUpdate(aux);

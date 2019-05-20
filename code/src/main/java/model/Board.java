@@ -1,3 +1,7 @@
+package model;
+
+import controller.BoardObserver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +48,7 @@ public class Board {
 
 
     //isto é do controler ou daqui?
-    protected void swap(Position p1, Position p2){
+    public void swap(Position p1, Position p2){
         GridElement g1 = this.getGridElement(p1);
         GridElement g2 = this.getGridElement(p2);
 

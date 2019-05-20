@@ -1,3 +1,5 @@
+package model;
+
 public class Block implements GridElement {
     private Color color;
 

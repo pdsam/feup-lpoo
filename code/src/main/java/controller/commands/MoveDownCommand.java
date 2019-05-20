@@ -1,3 +1,8 @@
+package controller.commands;
+
+import model.Board;
+import model.Position;
+
 public class MoveDownCommand implements Command {
     private Board board;
 

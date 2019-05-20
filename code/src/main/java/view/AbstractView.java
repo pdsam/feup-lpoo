@@ -1,3 +1,5 @@
+package view;
+
 import java.util.Queue;
 
 public abstract class AbstractView implements View {
