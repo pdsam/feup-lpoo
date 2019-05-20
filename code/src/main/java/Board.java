@@ -56,7 +56,7 @@ public class Board {
 
     }
 
-    public void setGridElements(Position p, GridElement element){
+    public synchronized void setGridElements(Position p, GridElement element){
         gridElements[p.getY()][p.getX()] = element;
 
     }

@@ -30,7 +30,7 @@ public class BoardController {
     public void run() {
 
         LineTimerThread timer = new LineTimerThread("LineTimerThread", board);
-        //timer.start();
+        timer.start();
 
         boardView.render();
         while (!boardView.shouldClose()) {
