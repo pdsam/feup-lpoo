@@ -1,3 +1,7 @@
+package model;
+
+import controller.BoardObserver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +22,7 @@ public class Board {
 
         for (int i = 7; i < 13; i++) {
             for (int j = 0; j < 6; j++) {
-                if(j == 2){
+                if(j == 0){
                     continue;
                 }
                 gridElements[i][j] = new Block();
@@ -44,7 +48,7 @@ public class Board {
 
 
     //isto é do controler ou daqui?
-    protected void swap(Position p1, Position p2){
+    public void swap(Position p1, Position p2){
         GridElement g1 = this.getGridElement(p1);
         GridElement g2 = this.getGridElement(p2);
 
@@ -56,7 +60,7 @@ public class Board {
 
     }
 
-    public void setGridElements(Position p, GridElement element){
+    public synchronized void setGridElements(Position p, GridElement element){
         gridElements[p.getY()][p.getX()] = element;
 
     }
@@ -65,10 +69,14 @@ public class Board {
         this.observers.add(ob);
     }
 
-    public void notifyObserver(Position p){
+    public void notifyObserver(List<Position> p){
         for(BoardObserver ob : this.observers){
-            ob.update(p);
+            for(Position temp: p){
+                ob.update(temp);
+            }
         }
     }
+
+
 
 }

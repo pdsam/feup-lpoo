@@ -1,3 +1,7 @@
+package view;
+
+import view.EventType;
+
 public interface View {
     void render();
     EventType pollEvents();

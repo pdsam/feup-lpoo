@@ -1,7 +1,13 @@
+package view;
+
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
+import model.Board;
+import model.Color;
+import model.GridElement;
+import model.Position;
 
 import java.io.IOException;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -82,7 +88,12 @@ public class LanternaBoardView extends AbstractView {
 
     @Override
     public void close() {
-        inputListener.stop();
+        inputListener.terminate();
+        try {
+            inputListener.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         shouldClose = true;
         try {
             context.close();

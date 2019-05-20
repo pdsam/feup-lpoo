@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Objects;
 
 public class Position {
@@ -44,5 +46,16 @@ public class Position {
         this.y--;
     }
 
+    public void incrementY(){
+        this.y = y + 1;
+    }
+
+    public void decrementX(){
+        this.x = x - 1;
+    }
+
+    public void incrementX(){
+        this.x = x + 1;
+    }
 
 }

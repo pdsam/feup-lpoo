@@ -1,10 +1,12 @@
+package view;
+
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
 import java.util.Queue;
 
-public class LanternaInputThread implements Runnable {
+public class LanternaInputThread extends Thread {
 
     private Screen context;
     private Queue<EventType> eventQueue;
@@ -57,12 +59,12 @@ public class LanternaInputThread implements Runnable {
         }
     }
 
-    public void start() {
+    public synchronized void start() {
         running = true;
-        new Thread(this, "Lanterna Input Listener").start();
+        super.start();
     }
 
-    public void stop() {
+    public void terminate() {
         running = false;
     }
 }
