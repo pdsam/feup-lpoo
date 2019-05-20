@@ -1,3 +1,5 @@
+package controller;
+
 import controller.BoardController;
 import model.Board;
 import model.Position;

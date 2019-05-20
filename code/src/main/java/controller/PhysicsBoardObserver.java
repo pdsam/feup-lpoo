@@ -1,4 +1,7 @@
+package controller;
+
 import controller.BoardController;
+import controller.BoardObserver;
 import model.Board;
 import model.Position;
 

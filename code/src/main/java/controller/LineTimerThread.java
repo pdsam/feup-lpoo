@@ -1,3 +1,5 @@
+package controller;
+
 import controller.commands.NewLineCommand;
 import model.Board;
 

@@ -1,7 +1,13 @@
 package controller;
 
+import controller.commands.*;
 import model.Block;
+import model.Board;
+import model.Position;
+import view.Callback;
+import view.EventType;
 
+import view.View;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -32,7 +38,7 @@ public class BoardController {
 
     public void run() {
 
-        LineTimerThread timer = new LineTimerThread("LineTimerThread", board);
+        LineTimerThread timer = new LineTimerThread("controller.LineTimerThread", board);
         timer.start();
 
         boardView.render();

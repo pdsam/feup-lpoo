@@ -1,5 +1,8 @@
 package controller.commands;
 
+import model.Board;
+import model.Position;
+
 public class MoveLeftCommand implements Command {
     private Board board;
 

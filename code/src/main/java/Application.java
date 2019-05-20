@@ -5,6 +5,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import controller.BoardController;
 import model.Board;
 import view.LanternaBoardView;
+import view.View;
 
 public class Application {
 
