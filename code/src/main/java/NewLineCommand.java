@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewLineCommand implements Command {
     private Board board;
 
@@ -8,6 +11,7 @@ public class NewLineCommand implements Command {
     @Override
     public void exec() {
 
+        List<Position> toUpdate = new ArrayList<>();
         for(int i = 0; i < board.getMaxY()-1;i++){
             for(int j = 0; j < board.getMaxX(); j++){
 
@@ -18,6 +22,8 @@ public class NewLineCommand implements Command {
 
         for(int i = 0; i < board.getMaxX();i++){
             board.setGridElements(new Position(i,board.getMaxY()-1),new Block());
+            toUpdate.add(new Position(i,board.getMaxY()-1));
+            board.notifyObserver(toUpdate);
         }
     }
 }
