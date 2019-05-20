@@ -3,7 +3,6 @@ public class PhysicsBoardObserver extends BoardObserver {
     public PhysicsBoardObserver(Board board, BoardController controller) {
         this.controler = controller;
         this.board = board;
-        this.board.attachObserver(this);
     }
 
     @Override
