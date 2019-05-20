@@ -65,9 +65,11 @@ public class Board {
         this.observers.add(ob);
     }
 
-    public void notifyObserver(Position p){
+    public void notifyObserver(List<Position> p){
         for(BoardObserver ob : this.observers){
-            ob.update(p);
+            for(Position temp: p){
+                ob.update(temp);
+            }
         }
     }
 
