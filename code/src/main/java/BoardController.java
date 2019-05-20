@@ -186,9 +186,11 @@ public class BoardController {
             }
             else break;
         }
-    //    System.out.println("after horizontal: "+positions.size());
-    //    if(positions.size() >= 3)
-    //        System.out.println("break");
+
+
+        if(positions.size() >= 3)
+            breaker(positions);
+
     }
 
 
