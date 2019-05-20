@@ -76,7 +76,7 @@ public class BoardController {
 
 
     private boolean inBoundaries(Position p){
-        if(p.getY() <0 || p.getY() >= board.getMaxY()  || p.getX() < 0 || p.getX()>=board.getMaxX()  )
+        if(p.getY() <0 || p.getY() >= board.getMaxY()  || p.getX() < 0 || p.getX()>=board.getMaxX())
             return false;
 
         return true;
@@ -123,26 +123,30 @@ public class BoardController {
 
 
     public void comboChecker(Position p){//first approach
-/*
+        if(board.getGridElement(p)== null)
+            return;
         Block origin = (Block) board.getGridElement(p);
         List<Position> positions = new ArrayList<>();
         //vertical
         int offset = 1;
+        positions.add(p);
         while(true) {
             Position temp = new Position(p.getX(), p.getY() + offset);
-            if (inBoundaries(temp)) {
+            if (inBoundaries(temp) && board.getGridElement(temp)!= null) {
+
                 if (origin.equals(board.getGridElement(temp))) {
                     positions.add(temp);
                     offset++;
                 } else
                     break;
             }
+
             else break;
         }
         offset = 1;
         while(true) {
             Position temp = new Position(p.getX(), p.getY() - offset);
-            if (inBoundaries(temp)) {
+            if (inBoundaries(temp) && board.getGridElement(temp)!= null) {
                 if (origin.equals(board.getGridElement(temp))) {
                     positions.add(temp);
                     offset++;
@@ -152,14 +156,16 @@ public class BoardController {
             else break;
         }
         offset = 1;
-        if(positions.size() < 3){
+        System.out.println("vertical: "+positions.size());
+        if(positions.size()< 3){
             positions.clear();
+            positions.add(p);
         }
 
         //horizontal
         while(true) {
             Position temp = new Position(p.getX() + offset, p.getY());
-            if (inBoundaries(temp)) {
+            if (inBoundaries(temp) && board.getGridElement(temp)!= null) {
                 if (origin.equals(board.getGridElement(temp))) {
                     positions.add(temp);
                     offset++;
@@ -171,7 +177,7 @@ public class BoardController {
         offset = 1;
         while(true) {
             Position temp = new Position(p.getX() - offset, p.getY());
-            if (inBoundaries(temp)) {
+            if (inBoundaries(temp)&& board.getGridElement(temp)!= null) {
                 if (origin.equals(board.getGridElement(temp))) {
                     positions.add(temp);
                     offset++;
@@ -180,11 +186,9 @@ public class BoardController {
             }
             else break;
         }
-
-        if(positions.size() > 3)
+        System.out.println("after horizontal: "+positions.size());
+        if(positions.size() >= 3)
             System.out.println("break");
-*/
-
     }
 
 
@@ -192,8 +196,8 @@ public class BoardController {
         for(Position tmp : p){
             board.setGridElements(tmp, null);
         }
-        for(Position tmp : p){
-            board.notifyObserver(tmp);
-        }
+
+            board.notifyObserver(p);
+
     }
 }
