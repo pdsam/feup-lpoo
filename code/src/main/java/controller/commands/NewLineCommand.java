@@ -31,7 +31,7 @@ public class NewLineCommand implements Command {
             toUpdate.add(new Position(i,board.getMaxY()-1));
             board.notifyObserver(toUpdate);
         }
-        if (board.getSelector().getPos().getY() > 0t ) {
+        if (board.getSelector().getPos().getY() > 0) {
             board.getSelector().getPos().decrementY();
         }
     }
