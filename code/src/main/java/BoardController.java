@@ -82,7 +82,7 @@ public class BoardController {
 
             Position bottom = new Position(p.getX(),board.getMaxY()-1);
 
-            while(board.getGridElement(bottom )!=null ){
+            while(board.getGridElement(bottom ) != null){
 
                 bottom.decrementY();
 

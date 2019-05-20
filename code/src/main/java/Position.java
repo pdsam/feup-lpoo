@@ -41,7 +41,7 @@ public class Position {
     }
 
     public void decrementY(){
-        this.y = y - 1;
+        this.y--;
     }
 
 
