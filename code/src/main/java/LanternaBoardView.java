@@ -82,7 +82,12 @@ public class LanternaBoardView extends AbstractView {
 
     @Override
     public void close() {
-        inputListener.stop();
+        inputListener.terminate();
+        try {
+            inputListener.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         shouldClose = true;
         try {
             context.close();

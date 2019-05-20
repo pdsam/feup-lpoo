@@ -1,3 +1,4 @@
+import javax.sound.sampled.Line;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -27,6 +28,10 @@ public class BoardController {
     }
 
     public void run() {
+
+        LineTimerThread timer = new LineTimerThread("LineTimerThread", board);
+        //timer.start();
+
         boardView.render();
         while (!boardView.shouldClose()) {
             EventType currentEvent;
@@ -35,6 +40,14 @@ public class BoardController {
             }
             boardView.render();
         }
+
+        timer.termminate();
+        try {
+            timer.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void moveUp() {
@@ -110,6 +123,7 @@ public class BoardController {
 
 
     public void comboChecker(Position p){//first approach
+/*
         Block origin = (Block) board.getGridElement(p);
         List<Position> positions = new ArrayList<>();
         //vertical
@@ -169,6 +183,7 @@ public class BoardController {
 
         if(positions.size() > 3)
             System.out.println("break");
+*/
 
     }
 
