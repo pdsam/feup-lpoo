@@ -19,5 +19,7 @@ public class NewLineCommand implements Command {
         for(int i = 0; i < board.getMaxX();i++){
             board.setGridElements(new Position(i,board.getMaxY()-1),new Block());
         }
+
+        board.getSelector().getPos().increment();
     }
 }

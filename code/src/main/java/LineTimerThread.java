@@ -18,7 +18,7 @@ public class LineTimerThread extends Thread {
     public void run() {
         while (running) {
             try {
-                sleep(5000);
+                sleep(15000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
