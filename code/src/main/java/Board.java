@@ -18,7 +18,7 @@ public class Board {
 
         for (int i = 7; i < 13; i++) {
             for (int j = 0; j < 6; j++) {
-                if(j == 2){
+                if(j == 0){
                     continue;
                 }
                 gridElements[i][j] = new Block();
@@ -71,13 +71,6 @@ public class Board {
         }
     }
 
-    public void breaker(List<Position> p){
-        for(Position tmp : p){
-            setGridElements(tmp, null);
-        }
-        for(Position tmp : p){
-            this.notifyObserver(tmp);
-        }
-    }
+
 
 }

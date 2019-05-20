@@ -80,9 +80,11 @@ public class BoardController {
             if(p.getY() == board.getMaxY() -1)
                 return;
 
+            if(board.getGridElement(new Position(p.getX(),p.getY()-1))!= null)
+                return;
             Position bottom = new Position(p.getX(),board.getMaxY()-1);
 
-            while(board.getGridElement(bottom )!=null ){
+            while(board.getGridElement(bottom )!=null&& bottom.getY()< p.getY() ){
 
                 bottom.decrementY();
 
@@ -167,6 +169,16 @@ public class BoardController {
 
         if(positions.size() > 3)
             System.out.println("break");
+
     }
 
+
+    public void breaker(List<Position> p){
+        for(Position tmp : p){
+            board.setGridElements(tmp, null);
+        }
+        for(Position tmp : p){
+            board.notifyObserver(tmp);
+        }
+    }
 }
