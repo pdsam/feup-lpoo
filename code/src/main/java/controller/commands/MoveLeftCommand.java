@@ -1,3 +1,5 @@
+package controller.commands;
+
 public class MoveLeftCommand implements Command {
     private Board board;
 

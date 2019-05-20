@@ -1,3 +1,6 @@
+import controller.commands.NewLineCommand;
+import model.Board;
+
 public class LineTimerThread extends Thread {
     private boolean running;
     private Board board;

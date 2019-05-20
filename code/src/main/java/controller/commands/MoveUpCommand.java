@@ -1,3 +1,5 @@
+package controller.commands;
+
 public class MoveUpCommand implements Command {
     private Board board;
 

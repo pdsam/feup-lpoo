@@ -1,3 +1,5 @@
+package controller.commands;
+
 public class MoveRightCommand implements Command {
     private Board board;
 

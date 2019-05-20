@@ -1,3 +1,5 @@
+package view;
+
 public enum EventType {
     UP_ARROW,
     DOWN_ARROW,
