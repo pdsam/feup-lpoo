@@ -97,7 +97,7 @@ public class BoardController {
                 return;
             Position bottom = new Position(p.getX(),board.getMaxY()-1);
 
-            while(board.getGridElement(bottom )!=null&& bottom.getY()< p.getY() ){
+            while(board.getGridElement(bottom )!=null&& bottom.getY()> p.getY() ){
 
                 bottom.decrementY();
 
@@ -156,7 +156,7 @@ public class BoardController {
             else break;
         }
         offset = 1;
-        System.out.println("vertical: "+positions.size());
+    //    System.out.println("vertical: "+positions.size());
         if(positions.size()< 3){
             positions.clear();
             positions.add(p);
@@ -186,9 +186,9 @@ public class BoardController {
             }
             else break;
         }
-        System.out.println("after horizontal: "+positions.size());
-        if(positions.size() >= 3)
-            System.out.println("break");
+    //    System.out.println("after horizontal: "+positions.size());
+    //    if(positions.size() >= 3)
+    //        System.out.println("break");
     }
 
 
