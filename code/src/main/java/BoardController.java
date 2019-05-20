@@ -85,8 +85,45 @@ public class BoardController {
 
 
 
-    public void blockGravityUpdate(Position p){//que função jabarda
-        if(!inBoundaries(p))
+    public void blockGravityUpdate(Position p){
+/*
+        for(int i = board.getMaxY()-1; i >= 0; i--){
+            Position newest = new Position(p.getX(),i);
+            if(board.getGridElement(newest)== null){
+                for(int j = newest.getY()-1; j >= 0 ; j--){
+                    Position toFall = new Position(p.getX(),j);
+                    if(board.getGridElement(toFall) != null){
+                        board.swap(newest,toFall);
+                        break;
+                    }
+                }
+
+            }
+*/
+
+        Position lastNull = null;
+        int y = board.getMaxY()-1;
+        for (; y >= 0; y--) {
+            Position temp = new Position(p.getX(), y);
+            if (board.getGridElement(temp) == null) {
+                lastNull = temp;
+                break;
+            }
+        }
+
+        y--;
+        for (; y >= 0; y--) {
+            Position temp = new Position(p.getX(), y);
+            if (board.getGridElement(temp) != null) {
+                board.swap(temp,lastNull);
+                lastNull.decrementY();
+            }
+        }
+
+
+
+
+/*        if(!inBoundaries(p))
             return;
 
         if(board.getGridElement(p) != null) {
@@ -118,7 +155,7 @@ public class BoardController {
             }
 
         }
-
+*/
     }
 
 
