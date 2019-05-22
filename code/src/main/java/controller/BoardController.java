@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardController {
+public class BoardController implements Controller{
     private Board board;
     private View boardView;
 
@@ -95,20 +95,6 @@ public class BoardController {
 
 
     public void blockGravityUpdate(Position p){
-/*
-        for(int i = board.getMaxY()-1; i >= 0; i--){
-            model.Position newest = new model.Position(p.getX(),i);
-            if(board.getGridElement(newest)== null){
-                for(int j = newest.getY()-1; j >= 0 ; j--){
-                    model.Position toFall = new model.Position(p.getX(),j);
-                    if(board.getGridElement(toFall) != null){
-                        board.swap(newest,toFall);
-                        break;
-                    }
-                }
-
-            }
-*/
 
         Position lastNull = null;
         int y = board.getMaxY()-1;

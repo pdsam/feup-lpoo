@@ -1,11 +1,11 @@
 package model;
 
-import controller.BoardObserver;
+import controller.BoardController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class Board implements BoardTemplate {
     private Selector selector;
     private GridElement[][] gridElements;
 
