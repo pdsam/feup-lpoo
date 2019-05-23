@@ -6,36 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board implements BoardTemplate {
+
+    private static final int BOARD_WIDTH = 6;
+    private static final int BOARD_HEIGHT = 13;
+
     private Selector selector;
     private GridElement[][] gridElements;
 
-    private int maxX;
-    private int maxY;
     private List<BoardObserver> observers = new ArrayList<BoardObserver>();
 
+    public Board(BoardContentGenerator generator) {
+        this.gridElements = new GridElement[BOARD_HEIGHT][BOARD_WIDTH];
+        generator.fillBoard(this.gridElements);
 
-    public Board() {
-        this.gridElements = new GridElement[13][6];
-        this.maxX = 6;
-        this.maxY = 13;
         this.selector = new Selector(new Position(0,0));
-
-        for (int i = 7; i < 13; i++) {
-            for (int j = 0; j < 6; j++) {
-                if(j == 0){
-                    continue;
-                }
-                gridElements[i][j] = new Block();
-            }
-        }
     }
 
     public int getMaxX() {
-        return  maxX;
+        return  BOARD_WIDTH;
     }
 
     public int getMaxY() {
-        return maxY;
+        return BOARD_HEIGHT;
     }
 
     public Selector getSelector() {
@@ -55,9 +47,7 @@ public class Board implements BoardTemplate {
         if (g1 != null || g2 != null) {
             this.setGridElements(p1,g2);
             this.setGridElements(p2,g1);
-
         }
-
     }
 
     public synchronized void setGridElements(Position p, GridElement element){
@@ -71,9 +61,7 @@ public class Board implements BoardTemplate {
 
     public void notifyObserver(List<Position> p){
         for(BoardObserver ob : this.observers){
-            for(Position temp: p){
-                ob.update(temp);
-            }
+            ob.update(p);
         }
     }
 

@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import controller.BoardController;
 import model.Board;
+import model.TestBoardGenerator;
 import view.LanternaBoardView;
 import view.View;
 
@@ -17,7 +18,7 @@ public class Application {
         screen.startScreen();
         screen.doResizeIfNecessary();
 
-        Board b = new Board();
+        Board b = new Board(new TestBoardGenerator());
         View v = new LanternaBoardView(screen, b);
         BoardController bC = new BoardController(v, b);
 

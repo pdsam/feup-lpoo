@@ -23,8 +23,7 @@ public class BoardController implements Controller{
         this.boardView = view;
         this.board = board;
 
-        this.board.attachObserver(new PhysicsBoardObserver(board,this));
-        this.board.attachObserver(new ComboBoardObserver(board, this));
+        this.board.attachObserver(new BoardChangeObserver(board));
 
         this.callbackMap = new EnumMap<>(EventType.class);
 
@@ -34,6 +33,7 @@ public class BoardController implements Controller{
         callbackMap.put(EventType.RIGHT_ARROW, this::moveRight);
         callbackMap.put(EventType.SPACE, this::swap);
         callbackMap.put(EventType.CLOSE, this::close);
+        callbackMap.put(EventType.ENTER, this::requestNewLine);
     }
 
     public void run() {
@@ -83,155 +83,8 @@ public class BoardController implements Controller{
         boardView.close();
     }
 
-
-    private boolean inBoundaries(Position p){
-        if(p.getY() <0 || p.getY() >= board.getMaxY()  || p.getX() < 0 || p.getX()>=board.getMaxX())
-            return false;
-
-        return true;
+    public void requestNewLine() {
+        new NewLineCommand(board).exec();
     }
 
-
-
-
-    public void blockGravityUpdate(Position p){
-
-        Position lastNull = null;
-        int y = board.getMaxY()-1;
-        for (; y >= 0; y--) {
-            Position temp = new Position(p.getX(), y);
-            if (board.getGridElement(temp) == null) {
-                lastNull = temp;
-                break;
-            }
-        }
-
-        y--;
-        for (; y >= 0; y--) {
-            Position temp = new Position(p.getX(), y);
-            if (board.getGridElement(temp) != null) {
-                board.swap(temp,lastNull);
-                lastNull.decrementY();
-            }
-        }
-
-
-
-
-/*        if(!inBoundaries(p))
-            return;
-
-        if(board.getGridElement(p) != null) {
-            if(p.getY() == board.getMaxY() -1)
-                return;
-
-            if(board.getGridElement(new model.Position(p.getX(),p.getY()-1))!= null)
-                return;
-            model.Position bottom = new model.Position(p.getX(),board.getMaxY()-1);
-
-            while(board.getGridElement(bottom )!=null&& bottom.getY()> p.getY() ){
-
-                bottom.decrementY();
-
-
-            }
-
-            board.swap(p,bottom);
-            blockGravityUpdate(new model.Position(p.getX(),p.getY()-1));
-
-        }
-        else{
-            if(p.getY() != 0){
-                model.Position aux = new model.Position(p.getX(),p.getY()-1);
-                if(board.getGridElement(aux)!= null)
-                    board.swap(p, aux);
-                blockGravityUpdate(aux);
-
-            }
-
-        }
-*/
-    }
-
-
-    public void comboChecker(Position p){//first approach
-        if(board.getGridElement(p)== null)
-            return;
-        Block origin = (Block) board.getGridElement(p);
-        List<Position> positions = new ArrayList<>();
-        //vertical
-        int offset = 1;
-        positions.add(p);
-        while(true) {
-            Position temp = new Position(p.getX(), p.getY() + offset);
-            if (inBoundaries(temp) && board.getGridElement(temp)!= null) {
-
-                if (origin.equals(board.getGridElement(temp))) {
-                    positions.add(temp);
-                    offset++;
-                } else
-                    break;
-            }
-
-            else break;
-        }
-        offset = 1;
-        while(true) {
-            Position temp = new Position(p.getX(), p.getY() - offset);
-            if (inBoundaries(temp) && board.getGridElement(temp)!= null) {
-                if (origin.equals(board.getGridElement(temp))) {
-                    positions.add(temp);
-                    offset++;
-                } else
-                    break;
-            }
-            else break;
-        }
-        offset = 1;
-    //    System.out.println("vertical: "+positions.size());
-        if(positions.size()< 3){
-            positions.clear();
-            positions.add(p);
-        }
-
-        //horizontal
-        while(true) {
-            Position temp = new Position(p.getX() + offset, p.getY());
-            if (inBoundaries(temp) && board.getGridElement(temp)!= null) {
-                if (origin.equals(board.getGridElement(temp))) {
-                    positions.add(temp);
-                    offset++;
-                } else
-                    break;
-            }
-            else break;
-        }
-        offset = 1;
-        while(true) {
-            Position temp = new Position(p.getX() - offset, p.getY());
-            if (inBoundaries(temp)&& board.getGridElement(temp)!= null) {
-                if (origin.equals(board.getGridElement(temp))) {
-                    positions.add(temp);
-                    offset++;
-                } else
-                    break;
-            }
-            else break;
-        }
-
-
-        if(positions.size() >= 3)
-            breaker(positions);
-
-    }
-
-
-    public void breaker(List<Position> p){
-        for(Position tmp : p){
-            board.setGridElements(tmp, null);
-        }
-
-            board.notifyObserver(p);
-
-    }
 }
