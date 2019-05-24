@@ -46,6 +46,9 @@ public class LanternaInputThread extends Thread {
                             eventQueue.add(EventType.CLOSE);
                         }
                         break;
+                    case Enter:
+                        eventQueue.add(EventType.ENTER);
+                        break;
                     case EOF:
                         running = false;
                         eventQueue.add(EventType.CLOSE);

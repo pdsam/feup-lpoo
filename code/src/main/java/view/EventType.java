@@ -6,5 +6,6 @@ public enum EventType {
     RIGHT_ARROW,
     LEFT_ARROW,
     SPACE,
-    CLOSE
+    CLOSE,
+    ENTER
 }

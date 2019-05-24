@@ -4,10 +4,7 @@ import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import model.Board;
-import model.Color;
-import model.GridElement;
-import model.Position;
+import model.*;
 
 import java.io.IOException;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -17,23 +14,25 @@ public class LanternaBoardView extends AbstractView {
     private TextGraphics graphics;
     private LanternaInputThread inputListener;
 
-    private Board board;
+    private BoardModel model;
     private boolean shouldClose = false;
 
-    public LanternaBoardView(Screen screen, Board board) {
+    public LanternaBoardView(Screen screen, BoardModel model) {
         this.eventQueue = new ConcurrentLinkedQueue<>();
         this.context = screen;
         this.inputListener = new LanternaInputThread(this.context, this.eventQueue);
 
         this.graphics = context.newTextGraphics();
 
-        this.board = board;
+        this.model = model;
 
         inputListener.start();
     }
 
     @Override
     public void render() {
+        Board board = model.getBoard();
+        BoardScore score = model.getScore();
 
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 6; j++) {
@@ -73,6 +72,9 @@ public class LanternaBoardView extends AbstractView {
         }
         graphics.enableModifiers(SGR.BOLD);
         graphics.putString(selectorPosition.getX()+1,selectorPosition.getY(),"S");
+
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.putString(7,0,Integer.toString(score.getScore()));
 
         try {
             context.refresh();
