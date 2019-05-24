@@ -2,6 +2,7 @@ package controller;
 
 import model.Board;
 import model.BoardObserver;
+import model.BoardScore;
 import model.Position;
 
 import java.util.ArrayList;
@@ -10,13 +11,18 @@ import java.util.List;
 public class BoardChangeObserver extends BoardObserver {
 
     private Board board;
+    private BoardScore score;
 
-    public BoardChangeObserver(Board board) {
+    public BoardChangeObserver(Board board, BoardScore score) {
         this.board = board;
+        this.score = score;
     }
 
     @Override
     public void update(List<Position> positions) {
+
+        int addedScore = 0;
+        int multiplier = 0;
 
         BoardGravityChecker gravityChecker = new BoardGravityChecker(board);
         BoardComboChecker comboChecker = new BoardComboChecker(board);
@@ -43,9 +49,14 @@ public class BoardChangeObserver extends BoardObserver {
         List<Position> toBreak;
 
         do {
+            multiplier++;
             toCheckCombo.addAll(gravityChecker.updateGravity(toCheckGravity));
 
             toBreak = comboChecker.checkCombos(toCheckCombo);
+
+            addedScore += toBreak.size()*multiplier;
         } while ((toCheckGravity = elementBreaker.breakElements(toBreak)) != null);
+
+        this.score.increase(addedScore);
     }
 }

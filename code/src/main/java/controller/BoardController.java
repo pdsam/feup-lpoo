@@ -1,9 +1,7 @@
 package controller;
 
 import controller.commands.*;
-import model.Block;
-import model.Board;
-import model.Position;
+import model.*;
 import view.Callback;
 import view.EventType;
 
@@ -16,14 +14,16 @@ import java.util.List;
 public class BoardController implements Controller{
     private Board board;
     private View boardView;
+    private BoardScore score;
 
     private Map<EventType, Callback> callbackMap;
 
-    public BoardController(View view, Board board) {
+    public BoardController(View view, BoardModel model) {
         this.boardView = view;
-        this.board = board;
+        this.board = model.getBoard();
+        this.score = model.getScore();
 
-        this.board.attachObserver(new BoardChangeObserver(board));
+        this.board.attachObserver(new BoardChangeObserver(this.board, this.score));
 
         this.callbackMap = new EnumMap<>(EventType.class);
 
@@ -42,15 +42,19 @@ public class BoardController implements Controller{
         timer.start();
 
         boardView.render();
-        while (!boardView.shouldClose()) {
+        while (!boardView.shouldClose() && !NewLineCommand.lost) {
             EventType currentEvent;
             while ((currentEvent = boardView.pollEvents()) != null) {
                 callbackMap.get(currentEvent).run();
             }
+
             boardView.render();
         }
 
         timer.termminate();
+        if (!boardView.shouldClose()) {
+            boardView.close();
+        }
         try {
             timer.join();
         } catch (InterruptedException e) {
