@@ -6,7 +6,7 @@ public enum Color {
     YELLOW(" ", "#FFFF00"), GREEN(" ", "#00FF00"),
     BLUE(" ", "#0000FF"), PURPLE(" ", "#FF00FF"),
     ORANGE( " ", "#FF5900"), GRAY(" ", "#9E9E9E"),
-    BAR("#", "#FFFFFF");
+    BAR("#", "#FFFFFF"), RED(" ","#FF0000");
 
     private final String character;
     private final String color;
