@@ -1,8 +1,6 @@
 package model.compositeBlocks;
 
-import model.AgregatedBlock;
 import model.Board;
-import model.Color;
 
 public class BasicComposite extends CompositeBlock {
     public BasicComposite(Board board) {
@@ -19,13 +17,5 @@ public class BasicComposite extends CompositeBlock {
 
     }
 
-    @Override
-    public void deleted() {
 
-    }
-
-    @Override
-    public Color getColor() {
-        return null;
-    }
 }

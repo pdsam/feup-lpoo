@@ -1,4 +1,7 @@
-package model;
+package model.compositeBlocks;
+
+import model.Color;
+import model.GridElement;
 
 public class AgregatedBlock implements GridElement {
     Color color;

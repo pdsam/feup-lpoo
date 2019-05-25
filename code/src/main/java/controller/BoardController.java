@@ -8,10 +8,8 @@ import view.EventType;
 import view.View;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
 
-public class BoardController implements Controller{
+public class BoardController implements BoardControllerInterface {
     private Board board;
     private View boardView;
     private BoardScore score;
@@ -90,5 +88,8 @@ public class BoardController implements Controller{
     public void requestNewLine() {
         new NewLineCommand(board).exec();
     }
+
+
+
 
 }
