@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CompositeBlock {
-    int numberUntillBreak;
-    int sizeX;
-    int sizeY;
-    List<GridElement> content = new ArrayList<>();
+    protected int numberUntillBreak;
+    protected int sizeX;
+    protected int sizeY;
+    protected List<GridElement> content = new ArrayList<>();
+
+
+
+
+
 
     public abstract void toBlocks();
 

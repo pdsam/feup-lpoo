@@ -7,35 +7,43 @@ import model.compositeBlocks.CompositeBlock;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CompositeBlockController {
     private Board board;
-    //private List<CompositeBlock> compositeBlocks= new ArrayList<>();
+    private List<CompositeBlock> allComposites = new ArrayList<>();
 
     public CompositeBlockController(Board board) {
         this.board = board;
     }
 
-    public boolean addComposite(CompositeBlock c){//dunno if works
-        
-        //compositeBlocks.add(c);
-        for(int i = 0; i < board.getMaxY();i++){
-            for(int j = 0; j < board.getMaxX();j++){
-                if(board.getGridElement(new Position(j,i)) != null){
+    public boolean addCompositeToBoard(CompositeBlock c){//dunno if works
+
+        allComposites.add(c);
+        int sizeY = c.getSizeY();
+        int sizeX = c.getSizeX();
+
+        //checking if can insert
+        for(int i = 0; i < sizeY; i ++){
+            for(int j = 0; j < sizeX; j++){
+                if(board.getGridElement(new Position(j,board.getMaxY()-1-i))!= null){
                     return false;
                 }
 
             }
-        }
 
-        for(int i = 0; i < c.getSizeY();i++) {
-            for (int j = 0; j < c.getSizeX(); j++) {
-                board.setGridElements(new Position(j,i),c.getContent().get(i*c.getSizeY() + j));
+
+
+        }
+        for(int i = 0; i < sizeY; i ++) {
+            for (int j = 0; j < sizeX; j++) {
+                board.setGridElements(new Position(j,board.getMaxY()-1-i),c.getContent().get(i*sizeX+j));
+
             }
         }
 
-
         return true;
     }
+
 
 
 }

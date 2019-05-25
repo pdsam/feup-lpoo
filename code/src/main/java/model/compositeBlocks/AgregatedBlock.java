@@ -5,8 +5,12 @@ import model.GridElement;
 
 public class AgregatedBlock implements GridElement {
     Color color;
-    public AgregatedBlock() {
+    protected CompositeBlock composite;
+
+
+    public AgregatedBlock(CompositeBlock composite) {
         this.color =Color.RED;
+        this.composite = composite;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class BasicComposite extends CompositeBlock {
         this.sizeY = 1;
         this.numberUntillBreak = 1;
         for(int i = 0; i < sizeX*sizeY;i++){
-            this.content.add(new AgregatedBlock());
+            this.content.add(new AgregatedBlock(this));
         }
     }
 
