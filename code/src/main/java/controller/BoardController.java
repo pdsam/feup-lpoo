@@ -8,8 +8,6 @@ import view.EventType;
 import view.View;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BoardController implements Controller{
     private Board board;
@@ -18,7 +16,12 @@ public class BoardController implements Controller{
 
     private Map<EventType, Callback> callbackMap;
 
+    private boolean running;
+
     public BoardController(View view, BoardModel model) {
+
+        this.running = true;
+
         this.boardView = view;
         this.board = model.getBoard();
         this.score = model.getScore();
@@ -38,29 +41,33 @@ public class BoardController implements Controller{
 
     public void run() {
 
-        LineTimerThread timer = new LineTimerThread("controller.LineTimerThread", board);
-        timer.start();
+        long lastRoot = System.currentTimeMillis();
+        long currentTime;
 
         boardView.render();
-        while (!boardView.shouldClose() && !NewLineCommand.lost) {
+
+        while (running && !NewLineCommand.lost) {
             EventType currentEvent;
             while ((currentEvent = boardView.pollEvents()) != null) {
                 callbackMap.get(currentEvent).run();
             }
 
+
+            long current = System.currentTimeMillis();
+            currentTime = current-lastRoot;
+
+            if (currentTime >= 15000) {
+                currentTime %= 15000;
+                new NewLineCommand(board).exec();
+                lastRoot = current;
+            }
+
             boardView.render();
         }
+        System.out.println("loop end");
 
-        timer.termminate();
-        if (!boardView.shouldClose()) {
-            boardView.close();
-        }
-        try {
-            timer.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        System.out.println("Controller signing out.");
+        boardView.close();
     }
 
     public void moveUp() {
@@ -84,7 +91,8 @@ public class BoardController implements Controller{
     }
 
     public void close() {
-        boardView.close();
+        running = false;
+        boardView.notifyClosing();
     }
 
     public void requestNewLine() {

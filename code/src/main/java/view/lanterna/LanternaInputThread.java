@@ -1,7 +1,8 @@
-package view;
+package view.lanterna;
 
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
+import view.EventType;
 
 import java.io.IOException;
 import java.util.Queue;
