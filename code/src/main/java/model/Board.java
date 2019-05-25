@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Board implements BoardTemplate {
 
-    private static final int BOARD_WIDTH = 6;
-    private static final int BOARD_HEIGHT = 13;
+    public static final int BOARD_WIDTH = 6;
+    public static final int BOARD_HEIGHT = 13;
 
     private Selector selector;
     private GridElement[][] gridElements;
