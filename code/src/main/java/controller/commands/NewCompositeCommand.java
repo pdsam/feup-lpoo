@@ -1,4 +1,12 @@
 package controller.commands;
 
-public class NewCompositeCOmmand {
+public class NewCompositeCommand implements Command{
+
+
+
+
+    @Override
+    public void exec() {
+
+    }
 }

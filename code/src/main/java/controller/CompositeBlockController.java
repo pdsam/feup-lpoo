@@ -10,7 +10,6 @@ import java.util.List;
 
 public class CompositeBlockController {
     private Board board;
-    private List<CompositeBlock> allComposites = new ArrayList<>();
 
     public CompositeBlockController(Board board) {
         this.board = board;
@@ -18,7 +17,6 @@ public class CompositeBlockController {
 
     public boolean addCompositeToBoard(CompositeBlock c){//dunno if works
 
-        allComposites.add(c);
         int sizeY = c.getSizeY();
         int sizeX = c.getSizeX();
 
