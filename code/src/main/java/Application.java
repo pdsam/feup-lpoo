@@ -1,15 +1,12 @@
 import controller.BoardController;
-import model.Board;
-import model.BoardModel;
-import model.BoardScore;
-import model.TestBoardGenerator;
+import model.*;
 import view.View;
 import view.swing.SwingBoardView;
 
 public class Application {
 
     public static void main(String[] args) throws Exception {
-        Board b = new Board(new TestBoardGenerator());
+        Board b = new Board(new BoardGeneratorNoAdjacency());
         BoardScore score = new BoardScore();
         BoardModel model = new BoardModel(b, score);
         //View v = new LanternaBoardView(model);
