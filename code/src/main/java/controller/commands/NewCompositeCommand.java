@@ -1,7 +1,13 @@
 package controller.commands;
 
-public class NewCompositeCommand implements Command{
+import model.Board;
 
+public class NewCompositeCommand implements Command{
+    private Board board;
+
+    public NewCompositeCommand(Board board) {
+        this.board = board;
+    }
 
 
 

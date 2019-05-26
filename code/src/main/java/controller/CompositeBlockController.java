@@ -1,5 +1,6 @@
 package controller;
 
+import model.Block;
 import model.Board;
 import model.Position;
 import model.compositeBlocks.CompositeBlock;
@@ -43,5 +44,14 @@ public class CompositeBlockController {
     }
 
 
+    public void toBlocks(CompositeBlock c) {
+        Position temp = new Position(c.getTopLeftCorner().getX(),c.getTopLeftCorner().getY());
+        for(int i = 0; i < c.getSizeY(); i++){
+            for(int j = 0; j < c.getSizeX();i++){
+                board.setGridElements(new Position(temp.getX()+j,temp.getX()+i),new Block());
+            }
+        }
+
+        }
 
 }

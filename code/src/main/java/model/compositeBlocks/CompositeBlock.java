@@ -13,6 +13,7 @@ public abstract class CompositeBlock {
     protected int sizeX;
     protected int sizeY;
     protected Position topLeftCorner;
+    protected Board board;
 
 
 
@@ -24,8 +25,6 @@ public abstract class CompositeBlock {
     }
 
 
-
-    public abstract void toBlocks();
 
     public int getNumberUntillBreak() {
         return numberUntillBreak;
