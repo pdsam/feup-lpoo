@@ -27,7 +27,7 @@ public class BoardGeneratorNoAdjacency implements BoardContentGenerator {
             for (int j = 0; j < board[i].length; j++) {
                 Block temp = new Block();
 
-                while (temp.getColor().equals(lastColor) && lastLine.get(j).equals(temp.getColor())) {
+                while (temp.getColor().equals(lastColor) || lastLine.get(j).equals(temp.getColor())) {
                     temp = new Block();
                 }
 

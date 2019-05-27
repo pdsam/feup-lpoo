@@ -1,6 +1,7 @@
 import controller.BoardController;
 import model.*;
 import view.View;
+import view.lanterna.LanternaBoardView;
 import view.swing.SwingBoardView;
 
 public class Application {
