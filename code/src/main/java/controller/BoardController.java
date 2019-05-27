@@ -40,6 +40,7 @@ public class BoardController implements Controller{
     }
 
     public void run() {
+        long timeToNewLine = 15000;
 
         long lastRoot = System.currentTimeMillis();
         long currentTime;
@@ -56,8 +57,10 @@ public class BoardController implements Controller{
             long current = System.currentTimeMillis();
             currentTime = current-lastRoot;
 
-            if (currentTime >= 15000) {
-                currentTime %= 15000;
+            if (currentTime >= timeToNewLine) {
+                currentTime %= timeToNewLine;
+                if(timeToNewLine > 3000)
+                    timeToNewLine -= 2000;
                 new NewLineCommand(board).exec();
                 lastRoot = current;
             }
