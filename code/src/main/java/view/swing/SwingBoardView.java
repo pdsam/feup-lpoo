@@ -7,10 +7,7 @@ import view.EventType;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 public class SwingBoardView extends AbstractView {
 
@@ -28,7 +25,19 @@ public class SwingBoardView extends AbstractView {
         this.frame = new JFrame("Crack Attack");
         LayoutManager layout = new BorderLayout();
         this.frame.setLayout(layout);
-        this.frame.setSize(new Dimension(300, 300));
+        this.frame.setMinimumSize(new Dimension(300, 300));
+        this.frame.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent evt) {
+                Dimension size = frame.getSize();
+                Dimension min = frame.getMinimumSize();
+                if (size.getWidth() < min.getWidth()) {
+                    frame.setSize((int) min.getWidth(), (int) size.getHeight());
+                }
+                if (size.getHeight() < min.getHeight()) {
+                    frame.setSize((int) size.getWidth(), (int) min.getHeight());
+                }
+            }
+        });
 
         //Score label
         this.scoreLabel = new JLabel("Your Score: 0");
