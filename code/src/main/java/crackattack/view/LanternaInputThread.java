@@ -13,15 +13,10 @@ public class LanternaInputThread extends Thread {
     private Queue<EventType> eventQueue;
     private boolean running;
 
-    private int ID;
-    private static int currID = 1;
-
     public LanternaInputThread(Screen context, Queue<EventType> eventQueue) {
         this.context = context;
         this.eventQueue = eventQueue;
         this.running = false;
-        this.ID = currID;
-        currID++;
     }
 
     @Override
@@ -53,7 +48,7 @@ public class LanternaInputThread extends Thread {
                             eventQueue.add(EventType.SPACE);
                         } else if (kS.getCharacter() == 'q') {
                             running = false;
-                            eventQueue.add(EventType.CLOSE);
+                            eventQueue.add(EventType.KEY_Q);
                         }
                         break;
                     case Enter:

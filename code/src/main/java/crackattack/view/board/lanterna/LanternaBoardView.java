@@ -69,6 +69,7 @@ public class LanternaBoardView extends AbstractLanternaView {
     public void render() {
         Board board = model.getBoard();
         BoardScore score = model.getScore();
+        NextLineTime time = model.getTimeToNextLine();
 
         for (int i = 0; i < Board.BOARD_HEIGHT; i++) {
             for (int j = 0; j < Board.BOARD_WIDTH; j++) {
@@ -81,6 +82,8 @@ public class LanternaBoardView extends AbstractLanternaView {
 
         graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         graphics.putString(Board.BOARD_WIDTH*CELL_WIDTH+3,3,"Your score: " + score.getScore());
+        graphics.putString(Board.BOARD_WIDTH*CELL_WIDTH+3, 5, "                                                           ");
+        graphics.putString(Board.BOARD_WIDTH*CELL_WIDTH+3,5,"Next line: " + time.getTime());
 
         try {
             context.refresh();

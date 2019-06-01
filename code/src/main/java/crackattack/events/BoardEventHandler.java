@@ -1,6 +1,7 @@
 package crackattack.events;
 
 import crackattack.Application;
+import crackattack.MVC.LoseScreenMVC;
 import crackattack.controller.Controller;
 import crackattack.controller.board.commands.*;
 import crackattack.model.board.BoardModel;
@@ -23,5 +24,7 @@ public class BoardEventHandler extends EventHandler {
         callbackMap.put(EventType.RIGHT_ARROW, ()->controller.addCommand(new MoveRightCommand(model.getBoard())));
         callbackMap.put(EventType.SPACE, ()->controller.addCommand(new SwapCommand(model.getBoard())));
         callbackMap.put(EventType.ENTER, ()->controller.addCommand(new NewLineCommand(model.getBoard())));
+        callbackMap.put(EventType.KEY_Q, ()->app.switchMVC(new LoseScreenMVC(app.getDispatcher(), app.getViewFactory(), model.getScore().getScore())));
+        callbackMap.put(EventType.LOST, ()->app.switchMVC(new LoseScreenMVC(app.getDispatcher(), app.getViewFactory(), model.getScore().getScore())));
     }
 }

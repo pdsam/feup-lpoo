@@ -23,6 +23,7 @@ public abstract class AbstractSwingView extends AbstractView {
             open = true;
 
             frame = new JFrame("Crack Attack");
+            frame.setResizable(false);
             frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 
             frame.addComponentListener(new ComponentAdapter() {
@@ -68,7 +69,7 @@ public abstract class AbstractSwingView extends AbstractView {
                         eventQueue.add(EventType.SPACE);
                         break;
                     case KeyEvent.VK_Q:
-                        eventQueue.add(EventType.CLOSE);
+                        eventQueue.add(EventType.KEY_Q);
                         break;
                     case KeyEvent.VK_ENTER:
                         eventQueue.add(EventType.ENTER);

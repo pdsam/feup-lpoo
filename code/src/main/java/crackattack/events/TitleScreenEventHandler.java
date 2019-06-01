@@ -11,6 +11,6 @@ public class TitleScreenEventHandler extends EventHandler {
 
     @Override
     protected void initiateCallbacks() {
-        callbackMap.put(EventType.SPACE, ()->app.switchMVC(new BoardMVC(app.getViewFactory())));
+        callbackMap.put(EventType.SPACE, ()->app.switchMVC(new BoardMVC(app.getDispatcher(), app.getViewFactory())));
     }
 }

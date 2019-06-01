@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewLineCommand implements Command {
-    public static boolean lost = false;
+    public boolean lost = false;
     private Board board;
 
     public NewLineCommand(Board board) {
@@ -41,5 +41,9 @@ public class NewLineCommand implements Command {
         if (board.getSelector().getPos().getY() > 0) {
             board.getSelector().getPos().decrementY();
         }
+    }
+
+    public boolean lost() {
+        return lost;
     }
 }

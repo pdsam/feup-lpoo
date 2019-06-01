@@ -1,9 +1,9 @@
 package crackattack;
 
-import crackattack.MVC.BoardMVC;
 import crackattack.MVC.ModelViewController;
 import crackattack.MVC.TitleScreenMVC;
 import crackattack.controller.Controller;
+import crackattack.events.EventDispatcher;
 import crackattack.events.EventHandler;
 import crackattack.events.EventType;
 import crackattack.view.SwingViewFactory;
@@ -19,14 +19,23 @@ public class Application {
     EventHandler eventHandler;
     ViewFactory viewFactory;
 
+    EventDispatcher dispatcher = new EventDispatcher() {
+        @Override
+        public void dispatchEvent(EventType event) {
+            eventHandler.handleEvent(event);
+        }
+    };
+
     public static void main(String[] args) {
         new Application().run();
     }
 
     private void run() {
         this.viewFactory = new SwingViewFactory();
+        //this.viewFactory = new LanternaViewFactory();
 
-        switchMVC(new TitleScreenMVC(viewFactory));
+        ModelViewController mvc = new TitleScreenMVC(dispatcher, this.viewFactory);
+        switchMVC(mvc);
 
         while (!getView().shouldClose()) {
             EventType currentEvent;
@@ -62,5 +71,9 @@ public class Application {
 
     public ViewFactory getViewFactory() {
         return viewFactory;
+    }
+
+    public EventDispatcher getDispatcher() {
+        return dispatcher;
     }
 }

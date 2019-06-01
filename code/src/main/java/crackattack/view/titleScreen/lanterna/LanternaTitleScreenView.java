@@ -17,14 +17,16 @@ public class LanternaTitleScreenView extends AbstractLanternaView {
     private int tileWidth;
     private int tileHeight;
 
+    private final String message = "Press Space";
+
     public LanternaTitleScreenView() throws IOException {
         super();
 
         this.tileWidth = WIDTH / NUM_HOR_TILES;
         this.tileHeight = HEIGHT / NUM_VER_TILES;
 
-        colorsPanel = new Color[NUM_VER_TILES][NUM_HOR_TILES];
-        for (int y = 0; y < NUM_VER_TILES; y++) {
+        colorsPanel = new Color[NUM_VER_TILES+1][NUM_HOR_TILES];
+        for (int y = 0; y < NUM_VER_TILES+1; y++) {
             for (int x = 0; x < NUM_HOR_TILES; x++) {
                 colorsPanel[y][x] = Color.randomColor();
             }
@@ -35,23 +37,22 @@ public class LanternaTitleScreenView extends AbstractLanternaView {
         graphics.setBackgroundColor(TextColor.Factory.fromString(colorsPanel[y][x].getColor()));
         for (int i = 0; i < tileHeight; i++) {
             for (int j = 0; j < tileWidth; j++) {
-                graphics.putString(x+j, y+i, " ");
+                graphics.putString(x*tileWidth+j, y*tileHeight+i, " ");
             }
         }
     }
 
     @Override
     public void render() {
-        int currX = 0;
-        int currY = 0;
-        for (int y = 0; y < NUM_VER_TILES; y++) {
+        for (int y = 0; y < NUM_VER_TILES+1; y++) {
             for (int x = 0; x < NUM_HOR_TILES; x++) {
-                paintTile(currX,currY);
-                currX += tileWidth;
+                paintTile(x,y);
             }
-            currX = 0;
-            currY += tileHeight;
         }
+
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
+        graphics.putString(WIDTH/2 - message.length() /2, HEIGHT/2, message);
 
         try {
             context.refresh();
