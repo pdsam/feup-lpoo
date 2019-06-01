@@ -16,11 +16,10 @@ public class BoardController implements Controller{
 
     private Map<EventType, Callback> callbackMap;
 
-    private boolean running;
-
+    private long timeToNewLine;
+    private long currentTime;
+    private long lastRoot;
     public BoardController(View view, BoardModel model) {
-
-        this.running = true;
 
         this.boardView = view;
         this.board = model.getBoard();
@@ -37,40 +36,37 @@ public class BoardController implements Controller{
         callbackMap.put(EventType.SPACE, this::swap);
         callbackMap.put(EventType.CLOSE, this::close);
         callbackMap.put(EventType.ENTER, this::requestNewLine);
+
+        this.timeToNewLine = 14000;
+        this.currentTime = 0;
+        this.lastRoot = System.currentTimeMillis();
     }
 
-    public void run() {
-        long timeToNewLine = 14000;
+    @Override
+    public void tick() {
+        EventType currentEvent;
+        while ((currentEvent = boardView.pollEvents()) != null) {
+            callbackMap.get(currentEvent).run();
+        }
 
-        long lastRoot = System.currentTimeMillis();
-        long currentTime;
+
+        long current = System.currentTimeMillis();
+        currentTime = current - lastRoot;
+
+        if (currentTime >= timeToNewLine) {
+            currentTime -= timeToNewLine;
+            if(timeToNewLine > 4000)
+                timeToNewLine -= 2000;
+            new NewLineCommand(board).exec();
+            lastRoot = current;
+        }
+
+        if (NewLineCommand.lost) {
+            boardView.notifyClosing();
+            return;
+        }
 
         boardView.render();
-
-        while (running && !NewLineCommand.lost) {
-            EventType currentEvent;
-            while ((currentEvent = boardView.pollEvents()) != null) {
-                callbackMap.get(currentEvent).run();
-            }
-
-
-            long current = System.currentTimeMillis();
-            currentTime = current-lastRoot;
-
-            if (currentTime >= timeToNewLine) {
-                currentTime %= timeToNewLine;
-                if(timeToNewLine > 4000)
-                    timeToNewLine -= 2000;
-                new NewLineCommand(board).exec();
-                lastRoot = current;
-            }
-
-            boardView.render();
-        }
-        System.out.println("loop end");
-
-        System.out.println("Controller signing out.");
-        boardView.close();
     }
 
     public void moveUp() {
@@ -94,7 +90,6 @@ public class BoardController implements Controller{
     }
 
     public void close() {
-        running = false;
         boardView.notifyClosing();
     }
 

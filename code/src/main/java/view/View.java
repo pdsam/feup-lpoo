@@ -7,4 +7,5 @@ public interface View {
     EventType pollEvents();
     void notifyClosing();
     void close();
+    boolean shouldClose();
 }

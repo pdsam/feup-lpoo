@@ -116,10 +116,10 @@ public class LanternaBoardView extends AbstractView {
     @Override
     public void notifyClosing() {
         inputListener.terminate();
+        inputListener.interrupt();
         try {
             inputListener.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
 
         try {
@@ -127,6 +127,8 @@ public class LanternaBoardView extends AbstractView {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        closing = true;
     }
 
     @Override

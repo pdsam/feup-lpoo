@@ -1,21 +1,28 @@
-import controller.BoardController;
-import model.*;
+import MVC.BoardMVC;
+import MVC.ModelViewController;
+import controller.Controller;
 import view.View;
-import view.lanterna.LanternaBoardView;
-import view.swing.SwingBoardView;
+import view.ViewFactory;
+import view.lanterna.LanternaViewFactory;
+import view.swing.SwingViewFactory;
 
 public class Application {
 
-    public static void main(String[] args) throws Exception {
-        Board b = new Board(new BoardGeneratorNoAdjacency());
-        BoardScore score = new BoardScore();
-        BoardModel model = new BoardModel(b, score);
-        View v = new LanternaBoardView(model);
-        //View v = new SwingBoardView(model);
+    public static void main(String[] args) {
 
-        BoardController bC = new BoardController(v, model);
+        ViewFactory viewFactory = new LanternaViewFactory();
 
-        bC.run();
+        ModelViewController boardMVC = new BoardMVC(viewFactory);
+
+        View view = boardMVC.getView();
+
+        Controller controller = boardMVC.getController();
+
+        while (!view.shouldClose()) {
+            controller.tick();
+        }
+
+        view.close();
     }
 
 }

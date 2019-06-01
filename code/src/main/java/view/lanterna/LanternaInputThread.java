@@ -57,8 +57,7 @@ public class LanternaInputThread extends Thread {
                     default:
                         break;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
             }
         }
     }

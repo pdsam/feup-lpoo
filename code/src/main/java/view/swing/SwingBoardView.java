@@ -103,6 +103,7 @@ public class SwingBoardView extends AbstractView {
             public void windowClosing(WindowEvent e) {
                 System.out.println("running handler");
                 open = false;
+                closing = true;
                 eventQueue.add(EventType.CLOSE);
             }
         });
