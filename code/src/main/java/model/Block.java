@@ -7,6 +7,7 @@ public class Block implements GridElement {
         color = Color.randomColor();
     }
 
+
     public Color getColor() {
         return color;
     }
