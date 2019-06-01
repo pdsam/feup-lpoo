@@ -39,7 +39,7 @@ public class Board implements BoardTemplate {
     }
 
 
-    //isto é do controler ou daqui?
+
     public void swap(Position p1, Position p2){
         GridElement g1 = this.getGridElement(p1);
         GridElement g2 = this.getGridElement(p2);
