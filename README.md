@@ -21,7 +21,7 @@ In this game, you have a board with colored blocks, over time, a new line of blo
 
 > How can someone install the game in their computer.
 
-Make sure to have Java 8 installed.
+Make sure you have Java 8 installed.
 
 ### Linux
 
