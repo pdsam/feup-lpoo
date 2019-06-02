@@ -31,7 +31,7 @@ It is possible to use both swing or laterna as the framework for the View.
  A game mechanic where after a certain amount of time a new line appears from the bottom. The frequency of the new line decreases with time.
  - ### Score Tracker
  Keeping track of the player's score.
- - ### Combo Detector
+ - ### Combo Detector and Breaker
  Detects combos (lines of at least 3 cubes with the same colour) and breaks them.
  - ### Physics Processor
  Detects if the blocks need to fall into their places aka. gravity.
@@ -77,12 +77,12 @@ We faced a problem where the controller needed to communicate with the board to 
 #### Solution:
 The observer design pattern came in handy for this as we made the controller observe the board. As a result, the communication between the board and the controller was made in a much simpler way. 
 
-### Adapter
+### Adapter TODO
 #### Problem
 
 #### Solution
 
-### State
+### State TODO
 #### Problem
 
 #### Solution
@@ -106,14 +106,19 @@ A few code smells we can already point out are:
 ### Parallel Inheritance Hierarchies
 #### Solution
 ### Duplicate Code
+Present in the combo checker
 #### Solution
+Create a function that generalizes the behaviour of the repetead code.
 ### Lazy class - null object
 The class Useless Controller is as the name says: useless. It only exists to act like a dummy.
 #### Solution
 
 ### Data class
-Position Selector
+Selector 
 #### Solution
+The selector class could easily be merged in the board class but this would make the Board class a big one.
+The alternative is to extract methods from board to the selector class, like swap.
+
 ### Controller Middle Man
 #### Solution
 
@@ -123,7 +128,7 @@ Position Selector
 <!--
 > This section should contain screenshots of the main results of both the test coverage and mutation testing reports. It should also contain links to those reports in HTML format (you can copy the reports to the docs folder).
 -->
-Right now no tests have been made to the code as it is still in a very volatile state and many changes are expected.
+
 
 ## Things added after presetation
 
@@ -140,3 +145,4 @@ Right now no tests have been made to the code as it is still in a very volatile 
 
 We both worked equally on the project.
 Moisés was responsible for the view part of the program and Paulo for the model. The controller part(game logic and such), and the documentation were worked on equally by both.
+
