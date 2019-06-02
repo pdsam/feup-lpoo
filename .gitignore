@@ -6,3 +6,5 @@
 out/
 build/
 *.iml
+tags
+design-patterns.txt

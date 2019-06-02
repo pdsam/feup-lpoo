@@ -1,6 +1,6 @@
 # LPOO_71 Crack Attack
 
-> Include here one or two paragraphs explaining the main idea of the project, followed by a sentence identifying who the authors are. 
+> The project goal is to recreate the game "Crack attack" (http://www.aluminumangel.org/attack/).
 
 ## Screenshots
 
