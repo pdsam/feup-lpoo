@@ -14,8 +14,8 @@
 
 > How can someone install the game in their computer.
 ### Linux
-1. 
-2.
+1. navigate into the code folder 
+2./gradle run --args
 
 ### Windows
 1.
