@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BoardChangeObserver</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">crackattack.controller.board</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BoardChangeObserver (crackattack.controller.board)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BoardChangeObserver</td>
+<td class="coverageStat">
+  <span class="percent">
+    66,7%
+  </span>
+  <span class="absValue">
+    (2/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90,6%
+  </span>
+  <span class="absValue">
+    (29/ 32)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BoardChangeObserver$MockitoMock$1316871532</td>
+  </tr>
+  <tr>
+    <td class="name">BoardChangeObserver$MockitoMock$1316871532$auxiliary$lNHjuR3C</td>
+  </tr>
+  <tr>
+    <td class="name">BoardChangeObserver$MockitoMock$1316871532$auxiliary$LYpIAziL</td>
+  </tr>
+  <tr>
+    <td class="name">BoardChangeObserver$MockitoMock$1316871532$auxiliary$PPNSk0Vx</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66,7%
+  </span>
+  <span class="absValue">
+    (2/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90,6%
+  </span>
+  <span class="absValue">
+    (29/ 32)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package crackattack.controller.board;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import crackattack.model.board.Board;
+<i>4</i>&nbsp;import crackattack.model.board.BoardObserver;
+<i>5</i>&nbsp;import crackattack.model.board.BoardScore;
+<i>6</i>&nbsp;import crackattack.model.board.Position;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.ArrayList;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;public class BoardChangeObserver extends BoardObserver {
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    private Board board;
+<i>14</i>&nbsp;    private BoardScore score;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private BoardGravityChecker gravityChecker;
+<i>17</i>&nbsp;    private BoardComboChecker comboChecker;
+<i>18</i>&nbsp;    private BoardElementBreaker elementBreaker;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public BoardChangeObserver(Board board, BoardScore score) {
+<b class="nc"><i>21</i>&nbsp;        this(board, score, new BoardGravityChecker(board), new BoardComboChecker(board), new BoardElementBreaker(board));</b>
+<b class="nc"><i>22</i>&nbsp;    }</b>
+<i>23</i>&nbsp;
+<b class="fc"><i>24</i>&nbsp;    public BoardChangeObserver(Board board, BoardScore score, BoardGravityChecker gravityChecker, BoardComboChecker comboChecker, BoardElementBreaker elementBreaker) {</b>
+<b class="fc"><i>25</i>&nbsp;        this.board = board;</b>
+<b class="fc"><i>26</i>&nbsp;        this.score = score;</b>
+<b class="fc"><i>27</i>&nbsp;        this.gravityChecker = gravityChecker;</b>
+<b class="fc"><i>28</i>&nbsp;        this.comboChecker = comboChecker;</b>
+<b class="fc"><i>29</i>&nbsp;        this.elementBreaker = elementBreaker;</b>
+<b class="fc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    @Override
+<i>33</i>&nbsp;    public void update(List&lt;Position&gt; positions) {
+<i>34</i>&nbsp;
+<b class="fc"><i>35</i>&nbsp;        int addedScore = 0;</b>
+<b class="fc"><i>36</i>&nbsp;        int multiplier = 0;</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;
+<b class="fc"><i>39</i>&nbsp;        List&lt;Position&gt; toCheckGravity = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>40</i>&nbsp;        List&lt;Position&gt; toCheckCombo = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>41</i>&nbsp;        for (Position p: positions) {</b>
+<b class="fc"><i>42</i>&nbsp;            if (board.getGridElement(p) == null) {</b>
+<b class="fc"><i>43</i>&nbsp;                toCheckGravity.add(p);</b>
+<b class="fc"><i>44</i>&nbsp;                continue;</b>
+<i>45</i>&nbsp;            }
+<b class="fc"><i>46</i>&nbsp;            if (p.getY() &lt; board.getMaxY() - 1) {</b>
+<b class="fc"><i>47</i>&nbsp;                if (board.getGridElement(new Position(p.getX(), p.getY()+1)) == null) {</b>
+<b class="fc"><i>48</i>&nbsp;                    toCheckGravity.add(p);</b>
+<i>49</i>&nbsp;                } else {
+<b class="nc"><i>50</i>&nbsp;                    toCheckCombo.add(p);</b>
+<i>51</i>&nbsp;                }
+<b class="fc"><i>52</i>&nbsp;            } else if (p.getY() == board.getMaxY() - 1) {</b>
+<b class="fc"><i>53</i>&nbsp;                toCheckCombo.add(p);</b>
+<i>54</i>&nbsp;            }
+<b class="fc"><i>55</i>&nbsp;        }</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;        List&lt;Position&gt; toBreak;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;        do {
+<b class="fc"><i>60</i>&nbsp;            multiplier++;</b>
+<b class="fc"><i>61</i>&nbsp;            toCheckCombo.addAll(gravityChecker.updateGravity(toCheckGravity));</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;
+<b class="fc"><i>64</i>&nbsp;            toBreak = comboChecker.checkCombos(toCheckCombo);</b>
+<b class="fc"><i>65</i>&nbsp;            toCheckCombo = new ArrayList&lt;&gt;();</b>
+<i>66</i>&nbsp;
+<b class="fc"><i>67</i>&nbsp;            addedScore += toBreak.size()*multiplier;</b>
+<b class="fc"><i>68</i>&nbsp;        } while ((toCheckGravity = elementBreaker.breakElements(toBreak)) != null);</b>
+<i>69</i>&nbsp;
+<b class="fc"><i>70</i>&nbsp;        this.score.increase(addedScore);</b>
+<b class="fc"><i>71</i>&nbsp;    }</b>
+<i>72</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 20:23</div>
+</div>
+</body>
+</html>

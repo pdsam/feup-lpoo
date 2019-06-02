@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Application</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">crackattack</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Application (crackattack)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Application</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Application$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 25)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package crackattack;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import crackattack.MVC.ModelViewController;
+<i>4</i>&nbsp;import crackattack.MVC.TitleScreenMVC;
+<i>5</i>&nbsp;import crackattack.controller.Controller;
+<i>6</i>&nbsp;import crackattack.events.EventDispatcher;
+<i>7</i>&nbsp;import crackattack.events.EventHandler;
+<i>8</i>&nbsp;import crackattack.events.EventType;
+<i>9</i>&nbsp;import crackattack.view.SwingViewFactory;
+<i>10</i>&nbsp;import crackattack.view.View;
+<i>11</i>&nbsp;import crackattack.view.ViewFactory;
+<i>12</i>&nbsp;
+<b class="nc"><i>13</i>&nbsp;public class Application {</b>
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    ModelViewController mvc;
+<i>16</i>&nbsp;    Controller controller;
+<i>17</i>&nbsp;    View view;
+<i>18</i>&nbsp;    EventHandler eventHandler;
+<i>19</i>&nbsp;    ViewFactory viewFactory;
+<i>20</i>&nbsp;
+<b class="nc"><i>21</i>&nbsp;    EventDispatcher dispatcher = new EventDispatcher() {</b>
+<i>22</i>&nbsp;        @Override
+<i>23</i>&nbsp;        public void dispatchEvent(EventType event) {
+<b class="nc"><i>24</i>&nbsp;            eventHandler.handleEvent(event);</b>
+<i>25</i>&nbsp;        }
+<i>26</i>&nbsp;    };
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public static void main(String[] args) {
+<b class="nc"><i>29</i>&nbsp;        new Application().run();</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    private void run() {
+<b class="nc"><i>33</i>&nbsp;        this.viewFactory = new SwingViewFactory();</b>
+<i>34</i>&nbsp;        //this.viewFactory = new LanternaViewFactory();
+<i>35</i>&nbsp;
+<b class="nc"><i>36</i>&nbsp;        ModelViewController mvc = new TitleScreenMVC(dispatcher, this.viewFactory);</b>
+<b class="nc"><i>37</i>&nbsp;        switchMVC(mvc);</b>
+<i>38</i>&nbsp;
+<b class="nc"><i>39</i>&nbsp;        while (!getView().shouldClose()) {</b>
+<i>40</i>&nbsp;            EventType currentEvent;
+<b class="nc"><i>41</i>&nbsp;            while ((currentEvent = getView().pollEvents()) != null) {</b>
+<b class="nc"><i>42</i>&nbsp;                dispatcher.dispatchEvent(currentEvent);</b>
+<i>43</i>&nbsp;            }
+<i>44</i>&nbsp;
+<b class="nc"><i>45</i>&nbsp;            getController().executeCommands();</b>
+<i>46</i>&nbsp;
+<b class="nc"><i>47</i>&nbsp;            getController().tick();</b>
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;            getView().render();</b>
+<b class="nc"><i>50</i>&nbsp;        }</b>
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;        System.out.println(&quot;closing&quot;);</b>
+<b class="nc"><i>53</i>&nbsp;        getView().close();</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public void switchMVC(ModelViewController mvc) {
+<b class="nc"><i>57</i>&nbsp;        this.mvc = mvc;</b>
+<b class="nc"><i>58</i>&nbsp;        this.controller = mvc.getController();</b>
+<b class="nc"><i>59</i>&nbsp;        this.view = mvc.getView();</b>
+<b class="nc"><i>60</i>&nbsp;        this.eventHandler = mvc.getEventHandler(this);</b>
+<i>61</i>&nbsp;    }
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    public View getView() {
+<b class="nc"><i>64</i>&nbsp;        return mvc.getView();</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public Controller getController() {
+<b class="nc"><i>68</i>&nbsp;        return mvc.getController();</b>
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public ViewFactory getViewFactory() {
+<b class="nc"><i>72</i>&nbsp;        return viewFactory;</b>
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public EventDispatcher getDispatcher() {
+<b class="nc"><i>76</i>&nbsp;        return dispatcher;</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 20:23</div>
+</div>
+</body>
+</html>
