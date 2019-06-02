@@ -19,13 +19,19 @@ Moisés Rocha - [Github](https://github.com/MPDR200011)
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 -->
 
- - Views both in swing and Lanterna 
- - Start Menu 
- - New lines feeder based on time 
- - Score Tracker
- - Combo Detector
- - Physics Processor
- - 
+ ### Views both in swing and Lanterna 
+It is possible to use both swing or laterna as the framework for the View.
+ ### Start Menu 
+ When the game start you have to press space for it to begin, and not starting instantly when you are not ready.
+ ### New lines feeder based on time 
+ A game mechanic where after a certain amount of time a new line appears from the bottom. The frequency of the new line decreases with time.
+ ### Score Tracker
+ Keeping track of the player's score.
+ ### Combo Detector
+ Detects combos (lines of at least 3 cubes with the same colour) and breaks them.
+ ### Physics Processor
+ Detects if the blocks need to fall into their places aka. gravity.
+ ###
    
 !["Swing GUI"](https://i.imgur.com/b4nuHle.png)
 ## Planned Features
@@ -36,9 +42,10 @@ Moisés Rocha - [Github](https://github.com/MPDR200011)
 -->
 !["Original GUI"](http://aluminumangel.org/attack/screen_shot_0.jpg)
 
-1. Abstract Factory enabling to switch the view to be implemented both in lanterna and swing.
-2. Implement the time based element in the game (pushing new lines into the board on a time base).
-3. Implment the row checker.
+
+ - [x] Abstract Factory enabling to switch the view to be implemented both in lanterna and swing.
+ - [x] Implement the time based element in the game (pushing new lines into the board on a time base).
+ - [x] Implment the row checker.
 
 ## Design
 
@@ -47,20 +54,35 @@ Moisés Rocha - [Github](https://github.com/MPDR200011)
 -->
 ### Architectural Pattern
 Given the fact that we are doing a game, we opted to use the Model-View-Controller Architectural Pattern.
+ - Model: Holds all the information to be displayed in the game.
+ - View: Displays the game with the information of the model, also gathers user input.
+ - Controller: Responsible for the control of the game.
 
 ### Large Amount of possible commands
-The controller will need to interact with the model diferently depending on the input from the user. Therefore having a large amount of possible commands, we opted to use the Command Design Pattern. This allows us to: structure a system around high-level operations built on primitive operations.
+#### Problem
+The controller will need to interact with the model diferently depending on the input from the user. Therefore having a large amount of possible commands.
+#### Solution
+ We opted to use the Command Design Pattern. This allows us to: structure a system around high-level operations built on primitive operations by having a Command interface and making the commands implement it.
 
 ### Comunication from the board(model) to the controller
-Later we faced a problem where the controller needed to know what changed in the board class to process it physics wise and combo wise. The observer design pattern came in handy for this as we made the controller observe the board. As a result, the communication between the board and the controller was made in a much simpler way. 
+#### Problem
+We faced a problem where the controller needed to communicate with the board to know what changed so it could process the physics  and check for combos. 
+#### Solution:
+The observer design pattern came in handy for this as we made the controller observe the board. As a result, the communication between the board and the controller was made in a much simpler way. 
 
 ### Adapter
+#### Problem
+#### Solution
 
 ### State
+#### Problem
+#### Solution
 
 ### Swing based view
-Finally, we had to add a view based on swing, maintining the rest  of code identical. Therefore we used the abstract factory design pattern, having an interface as the view. Thus, making the switching between lanterna and Swing much easier.
-
+#### Problem
+We had to add a view based on swing, maintining the rest  of code identical. 
+#### Solution
+Therefore we used the abstract factory design pattern, having an interface as the view. Thus, making the switching between lanterna and Swing much easier.
 
 ## Known Code Smells and Refactoring Suggestions
 
@@ -71,11 +93,17 @@ A few code smells we can already point out are:
 
 0. The BoardController Class should not be reading input, this should be a responsibility for the view. As we are intending to give the option of using either Swing or Lanterna. Both frameworks have different ways of handling input, so input handling is better suited to be handled by the view that will then send the appropriate messages to the controller. If we choose to keep the input handling in the controller, then the best option can be to create an abstract input handler class that can then be specialized into each of the frameworks, but this can cause the problem of the view not matching the respectie input handler that is being used, other than the fact that it introduces the Parallel Inheritance Hierarchies code smell.
 ### Switch Statements
+#### Solution
 ### Parallel Inheritance Hierarchies
+#### Solution
 ### Duplicate Code
+#### Solution
 ### Lazy class - null object
+#### Solution
 ### Data class
+#### Solution
 ### Controller Middle Man
+#### Solution
 
 
 ## Testing Results
@@ -91,4 +119,4 @@ Right now no tests have been made to the code as it is still in a very volatile 
 >-->
 
 We both worked equally on the project.
-Moisés was responsible for the view part of the program and Paulo for the model. The controller part(game logic and such) was worked on equally by both.
+Moisés was responsible for the view part of the program and Paulo for the model. The controller part(game logic and such), and the documentation were worked on equally by both.
