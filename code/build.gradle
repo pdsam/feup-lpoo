@@ -6,10 +6,10 @@ plugins {
 group 'com.lpoo_71.crackattack'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.11
 
 application {
-    mainClassName = 'Application'
+    mainClassName = 'crackattack.Application'
 }
 
 repositories {
