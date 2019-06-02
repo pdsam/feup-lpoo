@@ -1,15 +1,21 @@
 import crackattack.Constants;
+import crackattack.controller.board.BoardChangeObserver;
 import crackattack.controller.board.BoardComboChecker;
+import crackattack.controller.board.BoardElementBreaker;
 import crackattack.controller.board.BoardGravityChecker;
 import crackattack.model.board.*;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.awt.geom.GeneralPath;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 
 public class TestCommandsWithObservers {
     public GridElement[][] generateContentFromTemplate(String[] template) {
@@ -67,6 +73,17 @@ public class TestCommandsWithObservers {
                 dest[i][j] = source[i][j];
             }
         }
+    }
+
+    private GridElement[][] copyBoardContents(Board board) {
+        GridElement[][] copy = new GridElement[board.getMaxY()][board.getMaxX()];
+        for (int i = 0; i < board.getMaxY(); i++) {
+            for (int j = 0; j < board.getMaxX(); j++) {
+                copy[i][j] = board.getGridElement(new Position(j,i));
+            }
+        }
+
+        return copy;
     }
 
     public Board createBoardFromTemplate(String[] template) {
@@ -332,5 +349,130 @@ public class TestCommandsWithObservers {
         );
 
         assertEquals(expected, result);
+
+        result = checker.checkCombos(Arrays.asList(
+                new Position(4, 12)
+        ));
+
+        expected = new ArrayList<>();
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testBreaker() {
+        String[] template = {
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP",
+                "PPPPPP"
+        };
+
+        Board board = createBoardFromTemplate(template);
+        BoardElementBreaker breaker = new BoardElementBreaker(board);
+
+        List<Position> expected = Arrays.asList(
+                new Position(0,0),
+                new Position(2,2),
+                new Position(3,3),
+                new Position(5,6),
+                new Position(0,12),
+                new Position(1,12),
+                new Position(5,12),
+                new Position(3,4)
+        );
+
+        List<Position> result = breaker.breakElements(expected);
+
+        assertEquals(expected, result);
+
+        expected = new ArrayList<>();
+        result = breaker.breakElements(expected);
+
+        assertNull(result);
+    }
+
+    @Test
+    public void testCompleteBreaking() {
+
+        String[] template = {
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "AAA   "
+        };
+
+        String[] resultTemplate = {
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      ",
+                "      "
+        };
+
+        Board board = createBoardFromTemplate(template);
+        BoardScore score = new BoardScore();
+
+        BoardGravityChecker gravity = Mockito.spy(new BoardGravityChecker(board));
+        BoardComboChecker combo = Mockito.spy(new BoardComboChecker(board));
+        BoardElementBreaker breaker = Mockito.spy(new BoardElementBreaker(board));
+
+        BoardChangeObserver observer = new BoardChangeObserver(board, score, gravity, combo, breaker);
+        board.attachObserver(observer);
+        board.notifyObserver(Arrays.asList(new Position(0,12)));
+
+
+        //Check execution calls
+        Mockito.verify(gravity, times(1)).updateGravity(Arrays.asList());
+        Mockito.verify(combo, times(1)).checkCombos(Arrays.asList(
+                new Position(0, 12))
+        );
+        Mockito.verify(breaker, times(1)).breakElements(Arrays.asList(
+                new Position(0,12),
+                new Position(1, 12),
+                new Position(2, 12)
+        ));
+
+        Mockito.verify(gravity, times(1)).updateGravity(Arrays.asList(
+                new Position(0,12),
+                new Position(1, 12),
+                new Position(2, 12)
+        ));
+        Mockito.verify(combo, times(1)).checkCombos(Arrays.asList());
+        Mockito.verify(breaker, times(1)).breakElements(Arrays.asList());
+
+        GridElement[][] expected = generateContentFromTemplate(resultTemplate);
+
+        for (int i = 0; i < board.getMaxY(); i++) {
+            for (int j = 0; j < board.getMaxX(); j++) {
+                assertEquals(expected[i][j], board.getGridElement(new Position(j, i)));
+            }
+        }
     }
 }
