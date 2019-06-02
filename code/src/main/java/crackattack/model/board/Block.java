@@ -7,6 +7,10 @@ public class Block implements GridElement {
         color = Color.randomColor();
     }
 
+    public Block(Color color) {
+        this.color = color;
+    }
+
 
     public Color getColor() {
         return color;
@@ -18,10 +22,6 @@ public class Block implements GridElement {
         if (o == null || getClass() != o.getClass()) return false;
         Block block = (Block) o;
         return color == block.color;
-    }
-
-    @Override
-    public void deleted() {
     }
 
 }

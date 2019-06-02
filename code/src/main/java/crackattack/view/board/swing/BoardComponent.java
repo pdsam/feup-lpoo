@@ -13,7 +13,7 @@ public class BoardComponent extends JComponent {
     private Board board;
 
     private final int CELL_HEIGHT = Constants.SWING_BOARD_CELL_HEIGHT;
-    private final int CELL_WIDTH = Constants.SWING_BOARD_CELL_WIDHT;
+    private final int CELL_WIDTH = Constants.SWING_BOARD_CELL_WIDTH;
 
     public BoardComponent(Board board) {
         this.board = board;

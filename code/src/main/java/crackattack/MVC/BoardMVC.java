@@ -6,7 +6,7 @@ import crackattack.controller.board.BoardController;
 import crackattack.events.EventDispatcher;
 import crackattack.events.EventHandler;
 import crackattack.model.board.Board;
-import crackattack.model.board.BoardGeneratorNoAdjacency;
+import crackattack.model.board.generators.BoardGeneratorNoAdjacency;
 import crackattack.model.board.BoardModel;
 import crackattack.model.board.BoardScore;
 import crackattack.view.ViewFactory;

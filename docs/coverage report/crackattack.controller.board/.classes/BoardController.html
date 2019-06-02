@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BoardController</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">crackattack.controller.board</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BoardController (crackattack.controller.board)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BoardController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package crackattack.controller.board;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import crackattack.controller.AbstractController;
+<i>4</i>&nbsp;import crackattack.controller.board.commands.*;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import crackattack.events.EventDispatcher;
+<i>7</i>&nbsp;import crackattack.events.EventType;
+<i>8</i>&nbsp;import crackattack.model.board.Board;
+<i>9</i>&nbsp;import crackattack.model.board.BoardModel;
+<i>10</i>&nbsp;import crackattack.model.board.BoardScore;
+<i>11</i>&nbsp;import crackattack.model.board.NextLineTime;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class BoardController extends AbstractController {
+<i>14</i>&nbsp;    private Board board;
+<i>15</i>&nbsp;    private BoardScore score;
+<i>16</i>&nbsp;    private NextLineTime time;
+<i>17</i>&nbsp;
+<b class="nc"><i>18</i>&nbsp;    private final int INITIAL_LINE_TIME = 14000;</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    private long timeToNewLine;
+<i>21</i>&nbsp;    private long currentTime;
+<i>22</i>&nbsp;    private long last;
+<i>23</i>&nbsp;    public BoardController(EventDispatcher dispatcher, BoardModel model) {
+<b class="nc"><i>24</i>&nbsp;        super(dispatcher);</b>
+<i>25</i>&nbsp;
+<b class="nc"><i>26</i>&nbsp;        this.board = model.getBoard();</b>
+<b class="nc"><i>27</i>&nbsp;        this.score = model.getScore();</b>
+<b class="nc"><i>28</i>&nbsp;        this.time = model.getTimeToNextLine();</b>
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;        this.board.attachObserver(new BoardChangeObserver(this.board, this.score));</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;
+<b class="nc"><i>33</i>&nbsp;        this.timeToNewLine = INITIAL_LINE_TIME;</b>
+<b class="nc"><i>34</i>&nbsp;        this.currentTime = INITIAL_LINE_TIME;</b>
+<b class="nc"><i>35</i>&nbsp;        this.last = System.currentTimeMillis();</b>
+<b class="nc"><i>36</i>&nbsp;    }</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @Override
+<i>39</i>&nbsp;    public void tick() {
+<b class="nc"><i>40</i>&nbsp;        long current = System.currentTimeMillis();</b>
+<i>41</i>&nbsp;
+<b class="nc"><i>42</i>&nbsp;        currentTime -= current - last;</b>
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;        last = current;</b>
+<i>45</i>&nbsp;
+<b class="nc"><i>46</i>&nbsp;        if (currentTime &lt;= 0) {</b>
+<b class="nc"><i>47</i>&nbsp;            if(timeToNewLine &gt; 4000)</b>
+<b class="nc"><i>48</i>&nbsp;                timeToNewLine -= 2000;</b>
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;            currentTime += timeToNewLine;</b>
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;            NewLineCommand nlCommand = new NewLineCommand(board);</b>
+<b class="nc"><i>53</i>&nbsp;            nlCommand.exec();</b>
+<i>54</i>&nbsp;
+<b class="nc"><i>55</i>&nbsp;            if (nlCommand.lost()) {</b>
+<b class="nc"><i>56</i>&nbsp;                dispatcher.dispatchEvent(EventType.LOST);</b>
+<i>57</i>&nbsp;            }
+<i>58</i>&nbsp;        }
+<i>59</i>&nbsp;
+<b class="nc"><i>60</i>&nbsp;        time.setTime(currentTime);</b>
+<b class="nc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 20:23</div>
+</div>
+</body>
+</html>

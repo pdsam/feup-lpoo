@@ -13,9 +13,20 @@ public class BoardChangeObserver extends BoardObserver {
     private Board board;
     private BoardScore score;
 
+    private BoardGravityChecker gravityChecker;
+    private BoardComboChecker comboChecker;
+    private BoardElementBreaker elementBreaker;
+
     public BoardChangeObserver(Board board, BoardScore score) {
+        this(board, score, new BoardGravityChecker(board), new BoardComboChecker(board), new BoardElementBreaker(board));
+    }
+
+    public BoardChangeObserver(Board board, BoardScore score, BoardGravityChecker gravityChecker, BoardComboChecker comboChecker, BoardElementBreaker elementBreaker) {
         this.board = board;
         this.score = score;
+        this.gravityChecker = gravityChecker;
+        this.comboChecker = comboChecker;
+        this.elementBreaker = elementBreaker;
     }
 
     @Override
@@ -24,9 +35,6 @@ public class BoardChangeObserver extends BoardObserver {
         int addedScore = 0;
         int multiplier = 0;
 
-        BoardGravityChecker gravityChecker = new BoardGravityChecker(board);
-        BoardComboChecker comboChecker = new BoardComboChecker(board);
-        BoardElementBreaker elementBreaker = new BoardElementBreaker(board);
 
         List<Position> toCheckGravity = new ArrayList<>();
         List<Position> toCheckCombo = new ArrayList<>();
@@ -52,7 +60,9 @@ public class BoardChangeObserver extends BoardObserver {
             multiplier++;
             toCheckCombo.addAll(gravityChecker.updateGravity(toCheckGravity));
 
+
             toBreak = comboChecker.checkCombos(toCheckCombo);
+            toCheckCombo = new ArrayList<>();
 
             addedScore += toBreak.size()*multiplier;
         } while ((toCheckGravity = elementBreaker.breakElements(toBreak)) != null);

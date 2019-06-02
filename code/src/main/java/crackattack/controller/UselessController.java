@@ -1,6 +1,5 @@
 package crackattack.controller;
 
-import crackattack.Application;
 import crackattack.events.EventDispatcher;
 
 public class UselessController extends AbstractController {
@@ -9,7 +8,5 @@ public class UselessController extends AbstractController {
     }
 
     @Override
-    public void tick() {
-        return;
-    }
+    public void tick() {}
 }

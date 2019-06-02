@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class SwingTitleScreenView extends AbstractSwingView {
 
-    private final String mesage = "Press Space";
+    private final String message = "Press Space";
 
     public SwingTitleScreenView() {
         super();
@@ -18,7 +18,7 @@ public class SwingTitleScreenView extends AbstractSwingView {
         titleLabel.setOpaque(true);
         titleLabel.setFont(titleLabel.getFont().deriveFont(16F));
         titleLabel.setBackground(Color.WHITE);
-        titleLabel.setText(mesage);
+        titleLabel.setText(message);
         titleLabel.setAlignmentX(0.5F);
         titleLabel.setAlignmentY(0.5F);
         frame.getContentPane().add(titleLabel);
@@ -33,7 +33,5 @@ public class SwingTitleScreenView extends AbstractSwingView {
     }
 
     @Override
-    public void render() {
-        return;
-    }
+    public void render() {}
 }

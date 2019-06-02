@@ -1,6 +1,7 @@
 package crackattack.model.board;
 
 import crackattack.Constants;
+import crackattack.model.board.generators.BoardContentGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Board implements BoardTemplate {
     private Selector selector;
     private GridElement[][] gridElements;
 
-    private List<BoardObserver> observers = new ArrayList<BoardObserver>();
+    private List<BoardObserver> observers = new ArrayList<>();
 
     public Board(BoardContentGenerator generator) {
         this.gridElements = new GridElement[BOARD_HEIGHT][BOARD_WIDTH];

@@ -27,6 +27,10 @@ public class BoardGravityChecker {
                 }
             }
 
+            if (lastNull == null) {
+                continue;
+            }
+
             y--;
             for (; y >= 0; y--) {
                 Position temp = new Position(p.getX(), y);

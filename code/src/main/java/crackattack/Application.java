@@ -6,10 +6,12 @@ import crackattack.controller.Controller;
 import crackattack.events.EventDispatcher;
 import crackattack.events.EventHandler;
 import crackattack.events.EventType;
+import crackattack.view.LanternaViewFactory;
 import crackattack.view.SwingViewFactory;
 import crackattack.view.View;
 import crackattack.view.ViewFactory;
-import crackattack.view.LanternaViewFactory;
+
+import static java.lang.System.exit;
 
 public class Application {
 
@@ -26,12 +28,27 @@ public class Application {
         }
     };
 
+    public Application(ViewFactory view){
+        this.viewFactory = view;
+    }
+
     public static void main(String[] args) {
-        new Application().run();
+        if(args.length == 1 && args[0].equals("lanterna")){
+           new Application(new LanternaViewFactory()).run();
+        }
+        else if(args.length == 1 && args[0].equals("swing")){
+            new Application(new SwingViewFactory()).run();
+        }
+        else{
+            System.out.println("no args or wrong args given. Options 'lanterna' or 'swing' ");
+            exit(1);
+        }
+
+
     }
 
     private void run() {
-        this.viewFactory = new SwingViewFactory();
+        //this.viewFactory = new SwingViewFactory();
         //this.viewFactory = new LanternaViewFactory();
 
         ModelViewController mvc = new TitleScreenMVC(dispatcher, this.viewFactory);
@@ -40,7 +57,7 @@ public class Application {
         while (!getView().shouldClose()) {
             EventType currentEvent;
             while ((currentEvent = getView().pollEvents()) != null) {
-                eventHandler.handleEvent(currentEvent);
+                dispatcher.dispatchEvent(currentEvent);
             }
 
             getController().executeCommands();

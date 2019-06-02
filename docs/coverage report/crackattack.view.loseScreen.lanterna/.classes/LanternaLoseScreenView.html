@@ -1,0 +1,118 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LanternaLoseScreenView</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">crackattack.view.loseScreen.lanterna</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LanternaLoseScreenView (crackattack.view.loseScreen.lanterna)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LanternaLoseScreenView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package crackattack.view.loseScreen.lanterna;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.googlecode.lanterna.TextColor;
+<i>4</i>&nbsp;import crackattack.view.AbstractLanternaView;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.io.IOException;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class LanternaLoseScreenView extends AbstractLanternaView {
+<i>9</i>&nbsp;
+<b class="nc"><i>10</i>&nbsp;    private final String youLostMessage = &quot;You lost. Score: &quot;;</b>
+<b class="nc"><i>11</i>&nbsp;    private final String tryGainMessage = &quot;[Space] - Try again&quot;;</b>
+<b class="nc"><i>12</i>&nbsp;    private final String quitMessage = &quot;[Q] - Quit&quot;;</b>
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    private int finalScore;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    public LanternaLoseScreenView(int finalScore) throws IOException {
+<b class="nc"><i>17</i>&nbsp;        super();</b>
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;        this.finalScore = finalScore;</b>
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    @Override
+<i>23</i>&nbsp;    public void render() {
+<b class="nc"><i>24</i>&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#FFFFFF&quot;));</b>
+<b class="nc"><i>25</i>&nbsp;        graphics.putString(WIDTH/2 - youLostMessage.length()/2, HEIGHT/2 - 1, youLostMessage + finalScore);</b>
+<b class="nc"><i>26</i>&nbsp;        graphics.putString(WIDTH/2 - tryGainMessage.length()/2, HEIGHT/2, tryGainMessage);</b>
+<b class="nc"><i>27</i>&nbsp;        graphics.putString(WIDTH/2 - quitMessage.length()/2, HEIGHT/2 + 1, quitMessage);</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;        try {
+<b class="nc"><i>30</i>&nbsp;            context.refresh();</b>
+<b class="nc"><i>31</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i>32</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i>33</i>&nbsp;        }</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 20:23</div>
+</div>
+</body>
+</html>
