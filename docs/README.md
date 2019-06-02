@@ -19,27 +19,37 @@ Moisés Rocha - [Github](https://github.com/MPDR200011)
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 -->
 
- 
+- ### Views both in swing and Lanterna
 
- 
-
-- ### Views both in swing and Lanterna 
 It is possible to use both swing or laterna as the framework for the View.
- - ### Start Menu 
- When the game start you have to press space for it to begin, and not starting instantly when you are not ready.
-- ### New lines feeder based on time 
- A game mechanic where after a certain amount of time a new line appears from the bottom. The frequency of the new line decreases with time.
- - ### Score Tracker
- Keeping track of the player's score.
- - ### Combo Detector and Breaker
- Detects combos (lines of at least 3 cubes with the same colour) and breaks them.
- - ### Physics Processor
- Detects if the blocks need to fall into their places aka. gravity.
- #- ## "You Lost" and detection
- Added a "You Lost" screen and a way to detect when blocks get over the top.
-   
+
+- ### Start Menu
+
+When the game start you have to press space for it to begin, and not starting instantly when you are not ready.
+
+- ### New lines feeder based on time
+
+A game mechanic where after a certain amount of time a new line appears from the bottom. The frequency of the new line decreases with time.
+
+- ### Score Tracker
+
+Keeping track of the player's score.
+
+- ### Combo Detector and Breaker
+
+Detects combos (lines of at least 3 cubes with the same colour) and breaks them.
+
+- ### Physics Processor
+
+Detects if the blocks need to fall into their places aka. gravity.
+
+- ### "You Lost" and detection
+
+Added a "You Lost" screen and a way to detect when blocks get over the top.
+
 !["Swing GUI"](https://i.imgur.com/b4nuHle.png)
 !["Lantera GUI"](https://imgur.com/zy7qwwc.png)
+
 ## Planned Features
 
 <!--
@@ -138,6 +148,7 @@ So, when the application switches the MVC, it also switches the handler. This be
 <!--
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation, and suggest ways in which the code could be refactored to eliminate them. Each smell and refactoring suggestions should be described in its own subsection.
 -->
+
 ### Switch Statements
 
 In the Lanterna input thread and in the Swing keyboard callback, we use switch statements to check which event to send to the queue.
