@@ -186,6 +186,7 @@ The selector class could easily be merged in the board class but this would make
 <!--
 > This section should contain screenshots of the main results of both the test coverage and mutation testing reports. It should also contain links to those reports in HTML format (you can copy the reports to the docs folder).
 -->
+!["Test Coverage"](!["Original GUI"](http://aluminumangel.org/attack/screen_shot_0.jpg))
 
 ## Things added after presetation
 
@@ -194,6 +195,10 @@ The selector class could easily be merged in the board class but this would make
 - "You Lost" Screen
 - State Patern
 - Refactor all around and better package organization (now the Command design pattern is actually useful)
+
+## UML
+It's inside the `uml/`  directory. Due to its size it's not included in the report.
+
 
 ## Self-evaluation
 
