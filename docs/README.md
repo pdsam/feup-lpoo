@@ -19,21 +19,27 @@ Moisés Rocha - [Github](https://github.com/MPDR200011)
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 -->
 
- ### Views both in swing and Lanterna 
+ 
+
+ 
+
+- ### Views both in swing and Lanterna 
 It is possible to use both swing or laterna as the framework for the View.
- ### Start Menu 
+ - ### Start Menu 
  When the game start you have to press space for it to begin, and not starting instantly when you are not ready.
- ### New lines feeder based on time 
+- ### New lines feeder based on time 
  A game mechanic where after a certain amount of time a new line appears from the bottom. The frequency of the new line decreases with time.
- ### Score Tracker
+ - ### Score Tracker
  Keeping track of the player's score.
- ### Combo Detector
+ - ### Combo Detector
  Detects combos (lines of at least 3 cubes with the same colour) and breaks them.
- ### Physics Processor
+ - ### Physics Processor
  Detects if the blocks need to fall into their places aka. gravity.
- ###
+ #- ## "You Lost" and detection
+ Added a "You Lost" screen and a way to detect when blocks get over the top.
    
 !["Swing GUI"](https://i.imgur.com/b4nuHle.png)
+!["Lantera GUI"](https://imgur.com/zy7qwwc.png)
 ## Planned Features
 
 <!--
@@ -46,6 +52,7 @@ It is possible to use both swing or laterna as the framework for the View.
  - [x] Abstract Factory enabling to switch the view to be implemented both in lanterna and swing.
  - [x] Implement the time based element in the game (pushing new lines into the board on a time base).
  - [x] Implment the row checker.
+ - [ ] Blocks that fall from sky(Big red horizontal block in the above picture)
 
 ## Design
 
@@ -72,10 +79,12 @@ The observer design pattern came in handy for this as we made the controller obs
 
 ### Adapter
 #### Problem
+
 #### Solution
 
 ### State
 #### Problem
+
 #### Solution
 
 ### Swing based view
@@ -99,8 +108,11 @@ A few code smells we can already point out are:
 ### Duplicate Code
 #### Solution
 ### Lazy class - null object
+The class Useless Controller is as the name says: useless. It only exists to act like a dummy.
 #### Solution
+
 ### Data class
+Position Selector
 #### Solution
 ### Controller Middle Man
 #### Solution
@@ -112,6 +124,14 @@ A few code smells we can already point out are:
 > This section should contain screenshots of the main results of both the test coverage and mutation testing reports. It should also contain links to those reports in HTML format (you can copy the reports to the docs folder).
 -->
 Right now no tests have been made to the code as it is still in a very volatile state and many changes are expected.
+
+## Things added after presetation
+
+ - Tests
+ - Title Screen
+ - "You Lost" Screen
+ - State Patern
+ - Refactor all around and better package organization (now the Command design pattern is actually useful)
 
 ## Self-evaluation
 <!--
