@@ -1,5 +1,5 @@
-import controller.commands.*;
-import model.*;
+import crackattack.controller.board.commands.*;
+import crackattack.model.board.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -65,9 +65,9 @@ public class TestCommands {
     public void MoveRightTest(){
         Command toTest = new MoveRightCommand(this.board);
         Selector selector = this.board.getSelector();
-        selector.setPos(new Position(5,5));
-        Position before = new Position(5,5);
-        toTest.exec();;
+        selector.setPos(new Position(3,5));
+        Position before = new Position(3,5);
+        toTest.exec();
         assertEquals(new Position(before.getX()+1,before.getY()),selector.getPos());
 
         selector.setPos(new Position(board.getMaxX()-2,1));
