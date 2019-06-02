@@ -45,7 +45,7 @@ public class Position {
     public void decrementY(){
         this.y--;
     }
-
+/*
     public void incrementY(){
         this.y = y + 1;
     }
@@ -57,5 +57,5 @@ public class Position {
     public void incrementX(){
         this.x = x + 1;
     }
-
+*/
 }

@@ -12,6 +12,7 @@ public class TestCommands {
     @Before
     public void initBoard() {
         this.board = new Board(new TestBoardGenerator());
+
     }
 
     //TODO test if commands notify observers;
@@ -89,6 +90,10 @@ public class TestCommands {
 
     }
 
+    @Test
+    public void NewLineTest(){
+
+    }
 
 
 
