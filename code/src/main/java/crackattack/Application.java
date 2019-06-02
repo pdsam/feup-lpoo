@@ -40,6 +40,7 @@ public class Application {
             new Application(new SwingViewFactory()).run();
         }
         else{
+            System.out.println("no args or wrong args given. Options 'lanterna' or 'swing' ");
             exit(1);
         }
 
