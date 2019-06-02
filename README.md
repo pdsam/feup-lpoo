@@ -14,8 +14,8 @@
 
 > How can someone install the game in their computer.
 ### Linux
-1. navigate into the code folder 
-2./gradle run --args
+1. navigate into the code folder
+2.  "/gradle run --args view" where view can be "lanterna" or "swing".
 
 ### Windows
 1.
