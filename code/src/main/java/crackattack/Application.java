@@ -39,7 +39,7 @@ public class Application {
         while (!getView().shouldClose()) {
             EventType currentEvent;
             while ((currentEvent = getView().pollEvents()) != null) {
-                eventHandler.handleEvent(currentEvent);
+                dispatcher.dispatchEvent(currentEvent);
             }
 
             getController().executeCommands();
