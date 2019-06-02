@@ -15,10 +15,7 @@ public class BoardComboChecker {
     }
 
     private boolean inBoundaries(Position p){
-        if(p.getY() <0 || p.getY() >= board.getMaxY()  || p.getX() < 0 || p.getX()>=board.getMaxX())
-            return false;
-
-        return true;
+        return p.getY() >= 0 && p.getY() < board.getMaxY() && p.getX() >= 0 && p.getX() < board.getMaxX();
     }
 
     public ArrayList<Position> checkCombos(List<Position> toCheck) {

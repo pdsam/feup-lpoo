@@ -1,7 +1,6 @@
 package crackattack.view;
 
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -54,6 +53,7 @@ public abstract class AbstractLanternaView extends AbstractView {
         try {
             inputListener.join();
         } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         try {
@@ -66,7 +66,5 @@ public abstract class AbstractLanternaView extends AbstractView {
     }
 
     @Override
-    public void close() {
-        return;
-    }
+    public void close() {}
 }

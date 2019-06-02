@@ -1,5 +1,9 @@
-package crackattack.model.board;
+package crackattack.model.board.generators;
 
+
+import crackattack.model.board.Block;
+import crackattack.model.board.Color;
+import crackattack.model.board.GridElement;
 
 import java.util.ArrayList;
 

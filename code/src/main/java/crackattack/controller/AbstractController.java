@@ -1,6 +1,5 @@
 package crackattack.controller;
 
-import crackattack.Application;
 import crackattack.controller.board.commands.Command;
 import crackattack.events.EventDispatcher;
 

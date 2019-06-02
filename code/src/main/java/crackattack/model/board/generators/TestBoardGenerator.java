@@ -1,4 +1,7 @@
-package crackattack.model.board;
+package crackattack.model.board.generators;
+
+import crackattack.model.board.Block;
+import crackattack.model.board.GridElement;
 
 public class TestBoardGenerator implements BoardContentGenerator {
     @Override

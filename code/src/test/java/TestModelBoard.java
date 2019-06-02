@@ -1,8 +1,7 @@
 import crackattack.model.board.Board;
 import crackattack.model.board.BoardModel;
 import crackattack.model.board.BoardScore;
-import crackattack.model.board.TestBoardGenerator;
-import org.junit.Before;
+import crackattack.model.board.generators.TestBoardGenerator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +17,6 @@ public class TestModelBoard {
         score.setScore(0);
         score.increase(200);
         assertEquals(200,score.getScore());
-
     }
 
 

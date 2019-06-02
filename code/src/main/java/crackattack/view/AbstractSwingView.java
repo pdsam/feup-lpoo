@@ -15,7 +15,7 @@ public abstract class AbstractSwingView extends AbstractView {
     private static WindowAdapter currentWindowAdapter;
 
     public static final int HEIGHT = Constants.BOARD_ROWS * Constants.SWING_BOARD_CELL_HEIGHT;
-    public static final int WIDTH = Constants.BOARD_COLUMNS * Constants.SWING_BOARD_CELL_WIDHT + 200;
+    public static final int WIDTH = Constants.BOARD_COLUMNS * Constants.SWING_BOARD_CELL_WIDTH + 200;
 
     public AbstractSwingView() {
         super();
@@ -46,9 +46,7 @@ public abstract class AbstractSwingView extends AbstractView {
 
         currentKeyListener = new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent keyEvent) {
-                return;
-            }
+            public void keyTyped(KeyEvent keyEvent) {}
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
@@ -81,9 +79,7 @@ public abstract class AbstractSwingView extends AbstractView {
             }
 
             @Override
-            public void keyReleased(KeyEvent keyEvent) {
-                return;
-            }
+            public void keyReleased(KeyEvent keyEvent) {}
         };
 
         frame.addKeyListener(currentKeyListener);

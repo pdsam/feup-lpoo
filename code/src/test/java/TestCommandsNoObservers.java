@@ -1,5 +1,7 @@
 import crackattack.controller.board.commands.*;
 import crackattack.model.board.*;
+import crackattack.model.board.generators.BoardContentGenerator;
+import crackattack.model.board.generators.TestBoardGenerator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TestCommands {
+public class TestCommandsNoObservers {
     private Board board;
     @Before
     public void initBoard() {
@@ -87,14 +89,56 @@ public class TestCommands {
 
         assertEquals(p1,board.getGridElement(new Position(board.getSelector().getPos().getX()+1,board.getSelector().getPos().getY())));
         assertEquals(p2,board.getGridElement(board.getSelector().getPos()));
+    }
 
+    private GridElement[][] copyBoard(Board board) {
+        GridElement[][] copy = new GridElement[board.getMaxY()][board.getMaxX()];
+        for (int i = 0; i < board.getMaxY(); i++) {
+            for (int j = 0; j < board.getMaxX(); j++) {
+                copy[i][j] = board.getGridElement(new Position(j,i));
+            }
+        }
+
+        return copy;
     }
 
     @Test
     public void NewLineTest(){
+        Command toTest = new NewLineCommand(this.board);
+        GridElement[][] copy = copyBoard(this.board);
+        toTest.exec();
 
+        for (int i = 0; i < board.getMaxY()-1; i++) {
+            for (int j = 0; j < board.getMaxX(); j++) {
+                assertEquals(copy[i+1][j], board.getGridElement(new Position(j,i)));
+            }
+        }
     }
 
+    @Test
+    public void TestImpossibleNewLine() {
+        BoardContentGenerator generator = board -> {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    board[i][j] = new Block();
+                }
+            }
+        };
+
+        Board board = new Board(generator);
+        NewLineCommand toTest = new NewLineCommand(board);
+        GridElement[][] copy = copyBoard(board);
+        toTest.exec();
+
+        for (int i = 0; i < board.getMaxY(); i++) {
+            for (int j = 0; j < board.getMaxX(); j++) {
+                assertEquals(copy[i][j], board.getGridElement(new Position(j,i)));
+            }
+        }
+
+        assertTrue(toTest.lost());
+
+    }
 
 
 }

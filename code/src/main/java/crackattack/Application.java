@@ -9,7 +9,6 @@ import crackattack.events.EventType;
 import crackattack.view.SwingViewFactory;
 import crackattack.view.View;
 import crackattack.view.ViewFactory;
-import crackattack.view.LanternaViewFactory;
 
 public class Application {
 

@@ -13,5 +13,5 @@ public class Constants {
 
 
     public static final int SWING_BOARD_CELL_HEIGHT = 30;
-    public static final int SWING_BOARD_CELL_WIDHT = 30;
+    public static final int SWING_BOARD_CELL_WIDTH = 30;
 }
