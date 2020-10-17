@@ -114,7 +114,7 @@ We faced a problem where the controller needed to communicate with the board to 
 
 The observer design pattern came in handy for this as we made the controller observe the board. As a result, the communication between the board and the controller was made in a much simpler way.
 
-### Unifying Differnt Input Handling Methods
+### Unifying Different Input Handling Methods
 
 #### Problem
 
